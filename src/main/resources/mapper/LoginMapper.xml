@@ -13,4 +13,16 @@
     <insert id="RegisterUser" parameterType="user" >
         insert into user values (null,#{username},#{password},#{email},#{role_id})
     </insert>
+    <select id="userLogin" parameterType="user" resultType="user">
+        select * from user where username = #{username} and password = #{password}
+    </select>
+    <select id="validateUserAndEmail" parameterType="user" resultType="int">
+        select count(1) from user where username = #{username} and email = #{email}
+    </select>
+    <select id="validateEmailIsReg" parameterType="user" resultType="int">
+        select count(1) from user where email = #{email}
+    </select>
+    <update id="updatePassword" parameterType="user" >
+        update user set password = #{password} where username = #{username}
+    </update>
 </mapper>

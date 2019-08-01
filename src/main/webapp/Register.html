@@ -27,6 +27,9 @@
     var stat = 1;
     //判断是否满足可以登录的条件
     var validateCodeStat = 0;
+    var validateUserName01 = 0;
+    var validatePassWord01 = 0;
+    var validateEmail01 = 0;
     function personalOrCompany02() {
         stat = 2;
         $("#id01").removeClass("active")
@@ -45,14 +48,14 @@
         var role_id = stat;
         if (username == null || username == "") {
                 $("#span01").css("color","red").text("用户名不能为空");
-                validateCodeStat = 0;
         } else {
             $("#span01").text("");
         }
         $.post("validateUserName",{username:username,role_id:role_id},function (date) {
             if (date > 0){
                 $("#span01").css("color","red").text("用户名已存在")
-                validateCodeStat = 0;
+            } else {
+                validateUserName01 = 1;
             }
         })
     }
@@ -60,9 +63,9 @@
         var username = $("#id002").val()
         if (username == null || username == ""){
             $("#span02").css("color","red").text("密码不能为空");
-            validateCodeStat = 0;
         } else {
             $("#span02").text("");
+            validatePassWord01 = 1;
         }
 
     }
@@ -73,14 +76,21 @@
         if(!reg.test(email))
         {
             $("#span03").css("color","red").text("邮箱格式不正确")
-            validateCodeStat = 0;
             return false;
         } else {
-            $.post("validateEmail",{email:email},function (date) {
-                if (date == "success"){
-                    $("#span03").css("color","green").text("邮件已发送")
+            $.post("validateEmailIsReg",{email:email},function (date) {
+                if (date > 0){
+                    $("#span03").css("color","red").text("该邮箱已注册")
+                } else {
+                    validateEmail01 = 1;
+                    $.post("validateEmail",{email:email},function (date) {
+                        if (date == "success"){
+                            $("#span03").css("color","green").text("邮件已发送")
+                        }
+                    })
                 }
             })
+
         }
     }
     //校验验证码
@@ -99,22 +109,22 @@
 
     function Register() {
         var date = $("#form01").serialize();
-        if (validateCodeStat == 1){
-            //验证码正确再进行提交
-            alert("注册")
-            //注册
-            $.post("Regist",date,function (date) {
-                if (date == "success"){
-                    if (stat == 1){
-                        location.href = "个人网页";
-                    } else {
-                        location.href = "企业网页";
+        if (validateCodeStat == 1 ){
+            if (validateUserName01 == 1){
+                if (validatePassWord01 == 1){
+                    if (validateEmail01 == 1) {
+                        //满足所有条件再进行提交
+                        //注册
+                        $.post("Regist",date,function (date) {
+                            if (date == "success"){
+                                location.href = "Login.html";
+                            }
+                        })
                     }
                 }
+            }
 
 
-
-            })
         } else {
             $("#span04").css("color","red").text("验证码错误")
         }

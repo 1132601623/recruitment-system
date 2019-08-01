@@ -33,4 +33,28 @@ public class LoginServiceImpl implements LoginService {
         int count = loginMapper.RegisterUser(user);
         return count;
     }
+
+    @Override
+    public User userLogin(User user) {
+        User user01 = loginMapper.userLogin(user);
+        return user01;
+    }
+
+    @Override
+    public int validateUserAndEmail(User user) {
+        int count = loginMapper.validateUserAndEmail(user);
+        return count;
+    }
+
+    @Override
+    public int validateEmailIsReg(User user) {
+        int count = loginMapper.validateEmailIsReg(user);
+        return count;
+    }
+
+    @Override
+    public int updatePassword(User user) {
+        int count = loginMapper.updatePassword(user);
+        return count;
+    }
 }

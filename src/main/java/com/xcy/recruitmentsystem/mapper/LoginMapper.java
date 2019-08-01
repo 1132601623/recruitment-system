@@ -14,4 +14,12 @@ public interface LoginMapper {
     int validateCode(ValidateCode validateCode);
 
     int RegisterUser(User user);
+
+    User userLogin(User user);
+
+    int validateUserAndEmail(User user);
+
+    int validateEmailIsReg(User user);
+
+    int updatePassword(User user);
 }

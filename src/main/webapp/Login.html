@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<meta name="Author" content="">
+<title>福田区优才中国行</title>
+<link href="css/css_whir.css" rel="stylesheet" type="text/css" />
+<script src="Script/jquery-1.4.2.min.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="Script/pngAlaph.js"></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<script type="text/javascript">
+    //登录
+    function Login() {
+        var date = $("#form01").serialize();
+        var stat = null;
+        $.post("userLogin",date,function (date) {
+             stat = date.role_id;
+             if (stat == 1){
+                 location.href = "个人";
+             } else if (stat == 2){
+                 location.href = "企业"
+             } else {
+                 $("#span01").css("color","red").text("用户名或密码错误")
+             }
+        })
+        return false;
+    }
+
+    function reset(){
+        $("#id001").val("")
+        $("#id002").val("")
+    }
+    function repeatInput01(){
+        $("#span01").text("")
+        $("#id001").val("")
+    }
+    function repeatInput02(){
+        $("#span01").text("")
+        $("#id002").val("")
+    }
+</script>
+</head>
+<body>
+    <div class="H_bodyEnd">
+    <div class="Banner"><img src="images/temp/Ban_visionFairs.jpg" /></div>
+    <div class="Content_noneBg">
+            
+            <!--Star-->
+            <h4 class="Style_title"><img src="images/member/Member_title.jpg" /></h4>
+            <div class="Style_line">
+                <form id="form01">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="Login_box">
+                      <tr>
+                        <td class="name">用户名：</td>
+                        <td><input name="username" id="id001" onfocus="repeatInput01()" type="text" class="text" placeholder="请输入用户名"/></td>
+                      </tr>
+                      <tr>
+                        <td class="name">密码：</td>
+                        <td><input name="password" id="id002" onfocus="repeatInput02()" type="password" class="text" placeholder="请输入密码"/></td>
+                      </tr>
+                        <tr>
+                            <td></td>
+                            <td><span id="span01"></span></td>
+                        </tr>
+                      <tr>
+                        <td>&nbsp;</td>
+                        <td><input name="" onclick="return Login()" type="button" class="btn01" value=""/>
+                            <input name="" type="button" onclick="reset()" class="btn02" value=""/>
+                            <a href="Password.html">忘记密码?</a></td>
+                      </tr>
+                    </table>
+                </form>
+            </div>
+            <!--End-->
+
+    <div class="space25"></div>
+    </div>
+    <div class="space25"></div>
+    </div>
+    <!--End-->
+    
+    <!--Bottom-->
+    <!--#include file="include/bottom.html" -->
+    <!--Bottom End-->
+    
+    
+</body>
+</html>
