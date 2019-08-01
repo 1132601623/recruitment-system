@@ -72,6 +72,7 @@ public class LoginController {
         System.out.println(count);
         return count;
     }
+    //修改密码
     @RequestMapping("/updatePassword")
     public String updatePassword(User user){
         int index = loginService.updatePassword(user);
