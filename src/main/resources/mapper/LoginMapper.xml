@@ -4,4 +4,13 @@
     <select id="validateUserName" parameterType="user" resultType="int">
         select count(1) from user where username =#{username}
     </select>
+    <insert id="insertIntoValidateCode" parameterType="ValidateCode" >
+        insert into validatecode values (null,#{validatecode})
+    </insert>
+    <select id="validateCode" parameterType="ValidateCode" resultType="int">
+        select count(1) from validatecode where validatecode =#{validatecode}
+    </select>
+    <insert id="RegisterUser" parameterType="user" >
+        insert into user values (null,#{username},#{password},#{email},#{role_id})
+    </insert>
 </mapper>

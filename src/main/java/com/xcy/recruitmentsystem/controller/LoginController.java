@@ -1,7 +1,9 @@
 package com.xcy.recruitmentsystem.controller;
 
 import com.xcy.recruitmentsystem.pojo.User;
+import com.xcy.recruitmentsystem.pojo.ValidateCode;
 import com.xcy.recruitmentsystem.service.LoginService;
+import com.xcy.recruitmentsystem.utils.MailUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +16,31 @@ public class LoginController {
     @RequestMapping("/validateUserName")
     public int validateUserName(User user){
         int count = loginService.validateUserName(user);
-        System.out.println(count);
         return count > 0 ? 1: 0;
+    }
+    @RequestMapping("/validateEmail")
+    public String validateEmail(String email){
+        System.out.println(email);
+        //发送邮件
+        String validateCode = MailUtils.getValidateCode(6);
+        MailUtils.sendMail(email,"您好:<br/>您本次的验证码是"+validateCode+",请于两小时内输入，否则失效。","优才中国行");
+        //保存验证到数据库，用于校验
+        ValidateCode validatecode = new ValidateCode();
+        validatecode.setValidatecode(validateCode);
+        loginService.insertIntoValidateCode(validatecode);
+        return "success";
+    }
+    @RequestMapping("/validateCode")
+    public  int validateCode(String validatecode){
+        ValidateCode validateCode = new ValidateCode();
+        validateCode.setValidatecode(validatecode);
+        int count = loginService.validateCode(validateCode);
+        return count > 0 ? 1: 0;
+    }
+    @RequestMapping("/Regist")
+    public String Regist(User user){
+        System.out.println(user);
+        int count = loginService.RegisterUser(user);
+        return count > 0 ? "success" : "fail";
     }
 }

@@ -23,28 +23,111 @@
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+    //用于区分个人或者企业
     var stat = 1;
+    //判断是否满足可以登录的条件
+    var validateCodeStat = 0;
     function personalOrCompany02() {
         stat = 2;
         $("#id01").removeClass("active")
         $("#id02").addClass("active")
+        $("#role").val(stat)
     }
     function personalOrCompany01() {
         stat = 1;
         $("#id02").removeClass("active")
         $("#id01").addClass("active")
+        $("#role").val(stat)
     }
     //校验用户名密码是否存在
     function yzUserName(){
         var username = $("#id001").val()
         var role_id = stat;
+        if (username == null || username == "") {
+                $("#span01").css("color","red").text("用户名不能为空");
+                validateCodeStat = 0;
+        } else {
+            $("#span01").text("");
+        }
         $.post("validateUserName",{username:username,role_id:role_id},function (date) {
             if (date > 0){
-                $("#span01").text("用户名已存在")
-            } else {
-                $("#span01").text("")
+                $("#span01").css("color","red").text("用户名已存在")
+                validateCodeStat = 0;
             }
         })
+    }
+    function yzPassWord(){
+        var username = $("#id002").val()
+        if (username == null || username == ""){
+            $("#span02").css("color","red").text("密码不能为空");
+            validateCodeStat = 0;
+        } else {
+            $("#span02").text("");
+        }
+
+    }
+    //发送邮箱验证码
+    function sendEmail(){
+        var email = $("#id003").val()
+        var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+        if(!reg.test(email))
+        {
+            $("#span03").css("color","red").text("邮箱格式不正确")
+            validateCodeStat = 0;
+            return false;
+        } else {
+            $.post("validateEmail",{email:email},function (date) {
+                if (date == "success"){
+                    $("#span03").css("color","green").text("邮件已发送")
+                }
+            })
+        }
+    }
+    //校验验证码
+    function yzValidateCode(){
+        var validatecode = $("#id004").val()
+        $.post("validateCode",{validatecode:validatecode},function (date) {
+            if (date > 0){
+                $("#span04").text("")
+                validateCodeStat = 1;
+            } else {
+                $("#span04").css("color","red").text("验证码错误")
+                validateCodeStat = 0;
+            }
+        })
+    }
+
+    function Register() {
+        var date = $("#form01").serialize();
+        if (validateCodeStat == 1){
+            //验证码正确再进行提交
+            alert("注册")
+            //注册
+            $.post("Regist",date,function (date) {
+                if (date == "success"){
+                    if (stat == 1){
+                        location.href = "个人网页";
+                    } else {
+                        location.href = "企业网页";
+                    }
+                }
+
+
+
+            })
+        } else {
+            $("#span04").css("color","red").text("验证码错误")
+        }
+
+        return false;
+    }
+
+
+    function reset(){
+        $("#id001").val("")
+        $("#id002").val("")
+        $("#id003").val("")
+        $("#id004").val("")
     }
 </script>
 </head>
@@ -54,6 +137,7 @@
     <div class="Content_noneBg">
             <h4 class="Style_title"><img src="images/member/Member_title.jpg" /></h4>
             <div class="Style_line">
+                <form id="form01">
                     <table onclick="personalReg"  width="100%" border="0" cellspacing="0" cellpadding="0" class="Login_box">
 
                         <div class="bs-example" style="margin-left: 355px;width: 249px;" data-example-id="nav-tabs-with-dropdown">
@@ -67,23 +151,41 @@
                         <td class="name">用户名：</td>
                         <td>
                             <input name="username" id="id001" onblur="yzUserName()"  type="text" class="text" placeholder="请输入用户名" />
-                            <span id="span01" style="font-size: 10px;color: red"></span>
+                            <span id="span01" style="font-size: 10px;"></span>
+                        </td>
+
+                      </tr>
+                        <input id="role" name="role_id" value="1" type="hidden" />
+                      <tr>
+                        <td class="name">密码：</td>
+                        <td>
+                            <input id="id002" name="password" onblur="yzPassWord()" type="text" class="text" placeholder="请输入密码"/>
+                            <span id="span02" style="font-size: 10px;"></span>
                         </td>
                       </tr>
                       <tr>
-                        <td class="name">密码：</td>
-                        <td><input name="password" type="text" class="text" placeholder="请输入密码"/></td>
+                        <td class="name">邮箱：</td>
+                        <td>
+                            <input name="email" onblur="sendEmail()" id="id003" type="text" class="text" placeholder="请输入邮箱"/>
+                            <span id="span03" style="font-size: 10px;color: green;"></span>
+                        </td>
                       </tr>
                       <tr>
-                        <td class="name">邮箱：</td>
-                        <td><input name="email" type="text" class="text" placeholder="请输入邮箱"/></td>
+                            <td class="name">验证码：</td>
+                            <td>
+                                <input name="validatecode" onblur="yzValidateCode()" id="id004" type="text" class="text" placeholder="请输入验证码"/>
+                                <span id="span04" style="font-size: 10px;color: green;"></span>
+                            </td>
                       </tr>
 
                       <tr>
                         <td>&nbsp;</td>
-                        <td><input name="" type="button" class="btn01" value=""/><input name="" type="button" class="btn02" value=""/></td>
+                        <td><input name="" type="button" onclick="return Register()" class="btn01" value=""/>
+                            <input name="" onclick="reset()" type="button" class="btn02" value=""/>
+                        </td>
                       </tr>
                     </table>
+                </form>
             </div>
 
     <div class="space25"></div>

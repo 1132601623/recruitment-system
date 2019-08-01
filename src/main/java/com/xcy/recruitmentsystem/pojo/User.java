@@ -6,6 +6,15 @@ public class User {
     private String password;
     private String email;
     private String role_id;
+    private String validateCode;
+
+    public String getValidateCode() {
+        return validateCode;
+    }
+
+    public void setValidateCode(String validateCode) {
+        this.validateCode = validateCode;
+    }
 
     public User() {
     }
