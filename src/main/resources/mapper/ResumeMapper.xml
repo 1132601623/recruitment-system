@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.recruitmentsystem.mapper.ResumeMapper">
+    <resultMap id="BaseResultMap" type="com.xcy.recruitmentsystem.pojo.Resume">
+        <id column="id" property="id"/>
+        <result column="p_name" property="pName"/>
+        <result column="p_birthday" property="pBirthday"/>
+        <result column="p_edu" property="pEdu"/>
+        <result column="p_gradute" property="pGradute"/>
+        <result column="p_skill" property="pSkill"/>
+        <result column="p_phone" property="pPhone"/>
+        <result column="p_work" property="pWork"/>
+        <result column="p_email" property="pEmail"/>
+        <result column="p_address" property="pAddress"/>
+        <result column="p_wanted" property="pWanted"/>
+        <result column="p_language" property="pLanguage"/>
+        <result column="p_open" property="pOpen"/>
+        <result column="p_expe" property="pExpe"/>
+        <result column="p_edu_erpe" property="pEduErpe"/>
+        <result column="p_study_expe" property="pStudyExpe"/>
+    </resultMap>
+
+    <resultMap id="workMap" type="com.xcy.recruitmentsystem.pojo.Work">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="w_name" jdbcType="VARCHAR" property="wName"/>
+        <result column="w_business" jdbcType="VARCHAR" property="wBusiness"/>
+        <result column="w_skill" jdbcType="VARCHAR" property="wSkill"/>
+        <result column="w_address" jdbcType="VARCHAR" property="wAddress"/>
+        <result column="w_request" jdbcType="VARCHAR" property="wRequest"/>
+        <result column="w_people" jdbcType="INTEGER" property="wPeople"/>
+        <result column="w_edu" jdbcType="VARCHAR" property="wEdu"/>
+        <result column="w_year" jdbcType="VARCHAR" property="wYear"/>
+        <result column="w_work_nature" jdbcType="VARCHAR" property="wWorkNature"/>
+        <result column="w_date" jdbcType="VARCHAR" property="wDate"/>
+        <result column="w_desc" jdbcType="VARCHAR" property="wDesc"/>
+    </resultMap>
+    <insert id="addResume" parameterType="resume">
+insert into resume values (null, #{pName}, #{pBirthday},
+      #{pEdu}, #{pGradute}, #{pSkill},
+      #{pPhone}, #{pWork}, #{pEmail},
+      #{pAddress}, #{pWanted}, #{pLanguage},
+      #{pOpen}, #{pExpe}, #{pEduErpe},
+      #{pStudyExpe})
+    </insert>
+
+    <select id="findJobByMessage" parameterType="work" resultMap="workMap">
+        select * from work
+        <where>
+            <if test="wBusiness != null and wBusiness != ''">
+                w_business = #{wBusiness}
+            </if>
+            <if test="wSkill != null and wSkill != ''">
+                and w_skill = #{wSkill}
+            </if>
+            <if test="wDate != null and wDate != ''">
+                and w_date = #{wDate}
+            </if>
+        </where>
+    </select>
+</mapper>
