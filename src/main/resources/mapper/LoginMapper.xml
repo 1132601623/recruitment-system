@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.recruitmentsystem.mapper.LoginMapper">
+    <select id="validateUserName" parameterType="user" resultType="int">
+        select count(1) from user where username =#{username}
+    </select>
+    <insert id="insertIntoValidateCode" parameterType="ValidateCode" >
+        insert into validatecode values (null,#{validatecode})
+    </insert>
+    <select id="validateCode" parameterType="ValidateCode" resultType="int">
+        select count(1) from validatecode where validatecode =#{validatecode}
+    </select>
+    <insert id="RegisterUser" parameterType="user" >
+        insert into user values (null,#{username},#{password},#{email},#{role_id})
+    </insert>
+    <select id="userLogin" parameterType="user" resultType="user">
+        select * from user where username = #{username} and password = #{password}
+    </select>
+    <select id="validateUserAndEmail" parameterType="user" resultType="int">
+        select count(1) from user where username = #{username} and email = #{email}
+    </select>
+    <select id="validateEmailIsReg" parameterType="user" resultType="int">
+        select count(1) from user where email = #{email}
+    </select>
+    <update id="updatePassword" parameterType="user" >
+        update user set password = #{password} where username = #{username}
+    </update>
+</mapper>
