@@ -8,6 +8,18 @@ public class User {
     private String role_id;
     private String validateCode;
 
+
+
+    private String autoLogin;
+
+    public String getAutoLogin() {
+        return autoLogin;
+    }
+
+    public void setAutoLogin(String autoLogin) {
+        this.autoLogin = autoLogin;
+    }
+
     public String getValidateCode() {
         return validateCode;
     }
