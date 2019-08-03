@@ -16,10 +16,10 @@
 <script type="text/javascript">
     var role_id = null;
     function Login(id) {
-        role_id = id;
         var jid = $.cookie("JSESSIONID")
         var date = $("#form01").serialize();
         $.post("userLogin",date,function (date) {
+            role_id = date.role_id;
             if (date.username != null){
                 if (date.username != ""){
                     if (id == 1){
@@ -89,6 +89,16 @@
         $("#input02").val("")
         $("#input04").val("")
     }
+    function profile() {
+        if (role_id == 1){
+           //个人登录成功后点击个人中心跳转到此页面
+            location.href = "个人登录成功后点击个人中心跳转到此页面"
+        }
+        if (role_id == 2) {
+            //企业登录成功后点击个人中心跳转到此页面
+            location.href = "企业登录成功后点击个人中心跳转到此页面"
+        }
+    }
 </script>
 </head>
 <body class="Home_bodyBg">
@@ -100,7 +110,7 @@
         <div class="logIn" id="id01"><a href="Login.html">登录</a>|<a href="Register.html">注册</a></div>
         <div class="logOut" id="id02">欢迎您<b id="id03">偶no！</b><a href="" onclick="loginOut()">退出登录</a></div>
         <dl class="addnav"><a href="Index.html">加入收藏</a><a href="sitemap.html">网站地图</a></dl>
-        <div class="frBtn"><a href="member/Index.html" class="a1">个人中心</a><a href="#" class="a2">手机版</a></div>
+        <div class="frBtn"><a href="" onclick="profile()" class="a1">个人中心</a><a href="#" class="a2">手机版</a></div>
         <div class="mainnav">
             <ul>
                   <li id="nav1"><span><a href="Index.html">首页</a></span></li>
