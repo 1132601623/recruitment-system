@@ -38,4 +38,9 @@ public class ResumeServiceImpl implements ResumeService {
     int result = resumeMapper.addJob(resume);
     return result > 0 ? true : false ;
   }
+
+  @Override
+  public List<Resume> findAllResume() {
+    return resumeMapper.findAllResume();
+  }
 }

@@ -17,4 +17,6 @@ public interface ResumeService {
   Resume findResumeByEmail(String email);
 
     boolean addJob(Resume resume);
+
+    List<Resume> findAllResume();
 }

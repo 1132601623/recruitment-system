@@ -17,4 +17,6 @@ public interface ResumeMapper {
   Resume findResumeByEmail(String email);
 
   int addJob(Resume resume);
+
+    List<Resume> findAllResume();
 }

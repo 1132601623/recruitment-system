@@ -76,4 +76,8 @@ insert into resume values (null, #{pName}, #{pBirthday},
     <update id="addJob" parameterType="resume">
         update work set r_id = #{id} where id =2
     </update>
+
+    <select id="findAllResume" resultMap="resumeMap">
+        select * from resume
+    </select>
 </mapper>
