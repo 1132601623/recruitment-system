@@ -79,6 +79,7 @@ public class LoginController {
         user01.setPassword("saodhfsajasjdfljkzhfasdfhsddjf");
         return user01;
     }
+
     @RequestMapping("/autoLogin")
     public User autoLogin(HttpSession session,HttpServletRequest request){
         String username = (String) session.getAttribute("username");
