@@ -47,6 +47,7 @@
     window.onload=function (ev) {
         $(".div001").hide();
         $.post("autoLogin",null,function (date) {
+            role_id = date.role_id;
             var role = date.role_id;
             if (role==null){
             } else {
@@ -90,9 +91,12 @@
         $("#input04").val("")
     }
     function profile() {
+        alert(role_id)
         if (role_id == 1){
+            alert(2)
            //个人登录成功后点击个人中心跳转到此页面
-            location.href = "个人登录成功后点击个人中心跳转到此页面"
+            location.href = "Login.html"
+
         }
         if (role_id == 2) {
             //企业登录成功后点击个人中心跳转到此页面
@@ -110,7 +114,7 @@
         <div class="logIn" id="id01"><a href="Login.html">登录</a>|<a href="Register.html">注册</a></div>
         <div class="logOut" id="id02">欢迎您<b id="id03">偶no！</b><a href="" onclick="loginOut()">退出登录</a></div>
         <dl class="addnav"><a href="Index.html">加入收藏</a><a href="sitemap.html">网站地图</a></dl>
-        <div class="frBtn"><a href="" onclick="profile()" class="a1">个人中心</a><a href="#" class="a2">手机版</a></div>
+        <div class="frBtn"><a onclick="profile()" >个人中心</a><a href="#" class="a2">手机版</a></div>
         <div class="mainnav">
             <ul>
                   <li id="nav1"><span><a href="Index.html">首页</a></span></li>
