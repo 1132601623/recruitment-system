@@ -39,4 +39,5 @@ public class Resume {
   private String pEduErpe;
 
   private String pStudyExpe;
+  private String pMyself;
 }

@@ -19,7 +19,7 @@
         $.post("userLogin",date,function (date) {
              stat = date.role_id;
              if (stat == 1){
-                 location.href = "个人登录成功";
+                 location.href = "../member/P_Index.html";
              } else if (stat == 2){
                  location.href = "企业登录成功"
              } else {

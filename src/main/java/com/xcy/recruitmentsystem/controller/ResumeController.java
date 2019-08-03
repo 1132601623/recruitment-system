@@ -40,6 +40,7 @@ public class ResumeController {
     // 查询出个人简历
     @RequestMapping("/findResumeByEmail")
     public Resume findResume(HttpSession session) {
+
         String email = (String) session.getAttribute("email");
         Resume resume = resumeService.findResumeByEmail(email);
         return resume;

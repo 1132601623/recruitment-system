@@ -20,6 +20,7 @@
         <result column="p_expe" property="pExpe"/>
         <result column="p_edu_erpe" property="pEduErpe"/>
         <result column="p_study_expe" property="pStudyExpe"/>
+        <result  column="p_myself" property="pMyself"/>
     </resultMap>
 
     <resultMap id="workMap" type="com.xcy.recruitmentsystem.pojo.Work">
