@@ -32,7 +32,6 @@ public class LoginController {
     //发送邮件
     @RequestMapping("/validateEmail")
     public String validateEmail(String email){
-        System.out.println(email);
         //发送邮件
         String validateCode = MailUtils.getValidateCode(6);
         MailUtils.sendMail(email,"您好:<br/>您本次的验证码是"+validateCode+",请于两小时内输入，否则失效。","优才中国行");
@@ -53,7 +52,6 @@ public class LoginController {
     //注册
     @RequestMapping("/Regist")
     public String Regist(User user){
-        System.out.println(user);
         int count = loginService.RegisterUser(user);
         return count > 0 ? "success" : "fail";
     }
@@ -64,7 +62,6 @@ public class LoginController {
         User user01 = loginService.userLogin(user);
         if (user01 != null){
             String autoLogin = user.getAutoLogin();
-            System.out.println(autoLogin);
             if (autoLogin != null){
                 session.setAttribute("username",user01.getUsername());
                 session.setAttribute("password",user01.getPassword());
@@ -72,27 +69,39 @@ public class LoginController {
                 session.setAttribute("email",user01.getEmail());
                 session.setMaxInactiveInterval(60*60*24*7);
             } else {
-                session.removeAttribute("username");
-                session.removeAttribute("password");
-                session.removeAttribute("role_id");
-                session.removeAttribute("email");
+                session.setAttribute("username",user01.getUsername());
+                session.setAttribute("password",user01.getPassword());
+                session.setAttribute("role_id",user01.getRole_id());
+                session.setAttribute("email",user01.getEmail());
+                session.setMaxInactiveInterval(60*30);
             }
         }
         user01.setPassword("saodhfsajasjdfljkzhfasdfhsddjf");
         return user01;
     }
     @RequestMapping("/autoLogin")
-    public User autoLogin(HttpSession session){
+    public User autoLogin(HttpSession session,HttpServletRequest request){
         String username = (String) session.getAttribute("username");
         String password = (String) session.getAttribute("password");
         String role_id = (String) session.getAttribute("role_id");
         String email = (String) session.getAttribute("email");
         User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setRole_id(role_id);
-        user.setEmail(email);
-        user.setPassword("ygugfhqbuyegdhbfgyyweblkdjfydsfjsdd");
+        if (username != null){
+            user.setUsername(username);
+            user.setPassword(password);
+            user.setRole_id(role_id);
+            user.setEmail(email);
+            user.setPassword("ygugfhqbuyegdhbfgyyweblkdjfydsfjsdd");
+        } else {
+            Cookie[] cookies = request.getCookies();
+            for (int i = 0; i < cookies.length ; i++){
+                if (cookies[i].getValue() == "username"){
+                    user.setUsername(cookies[i].getValue());
+                } else if (cookies[i].getValue() == "role_id"){
+                    user.setRole_id(cookies[i].getValue());
+                }
+            }
+        }
         return user;
     }
     @RequestMapping("/loginOut")
@@ -109,9 +118,7 @@ public class LoginController {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        System.out.println(user);
         int count = loginService.validateUserAndEmail(user);
-        System.out.println(count);
         return count;
     }
     //修改密码

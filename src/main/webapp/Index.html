@@ -16,20 +16,20 @@
 <script type="text/javascript">
     var role_id = null;
     function Login(id) {
-        var jid = $.cookie("JSESSIONID")
         var date = $("#form01").serialize();
         $.post("userLogin",date,function (date) {
             role_id = date.role_id;
+            var username01 = date.username;
             if (date.username != null){
                 if (date.username != ""){
+                    $.cookie('username', username01, { path: '/' });
+                    $.cookie('role_id', role_id, { path: '/' });
                     if (id == 1){
-                        //location.href = "个人登录成功跳转页面";
                         $("#id01").hide();
                         $("#id02").show();
                         $("#AutoTable1").css("display","none");
                         $("#id03").text(date.username)
                     } else{
-                        //location.href = "企业登录成功跳转页面";
                         $("#id01").hide();
                         $("#id02").show();
                         $("#loginBox").hide();
@@ -71,6 +71,8 @@
     function loginOut() {
         $.post("loginOut",null,function (date) {
             if (date == "success"){
+                $.removeCookie('username');
+                $.removeCookie('role_id');
                 $("#id01").show();
                 $("#id02").hide();
                 $("#AutoTable1").show();

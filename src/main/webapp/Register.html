@@ -116,8 +116,14 @@
                         //满足所有条件再进行提交
                         //注册
                         $.post("Regist",date,function (date) {
-                            if (date == "success"){
-                                location.href = "Login.html";
+                            if (stat == 1){
+                                if (date == "success"){
+                                    location.href = "个人注册成功登录页面";
+                                }
+                            } else if (stat == 2){
+                                if (date == "success"){
+                                    location.href = "企业注册成功登录页面";
+                                }
                             }
                         })
                     }
