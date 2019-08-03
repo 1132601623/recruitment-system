@@ -13,7 +13,7 @@
     <insert id="RegisterUser" parameterType="user" >
         insert into user values (null,#{username},#{password},#{email},#{role_id})
     </insert>
-    <select id="userLogin" parameterType="user" resultType="user">
+    <select id="userLogin" parameterType="user" resultType="com.xcy.recruitmentsystem.pojo.User">
         select * from user where username = #{username} and password = #{password}
     </select>
     <select id="validateUserAndEmail" parameterType="user" resultType="int">

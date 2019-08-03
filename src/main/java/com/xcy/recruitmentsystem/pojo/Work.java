@@ -31,4 +31,16 @@ public class Work {
   private String wDate;
 
   private String wDesc;
+
+  private String wBeginTime;
+
+  private String wEndTime;
+
+  private int wAge;
+
+  private int cId;
+
+  private String cName;
+
+  private String uEmail;
 }

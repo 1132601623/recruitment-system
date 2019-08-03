@@ -19,7 +19,23 @@ public class ResumeServiceImpl implements ResumeService {
   }
 
   @Override
-  public List<Resume> findJobByMessage(Work work) {
+  public List<Work> findJobByMessage(Work work) {
     return resumeMapper.findJobByMessage(work);
+  }
+
+  @Override
+  public List<Work> findJob() {
+    return resumeMapper.findJob();
+  }
+
+  @Override
+  public Resume findResumeByEmail(String email) {
+    return resumeMapper.findResumeByEmail(email);
+  }
+
+  @Override
+  public boolean addJob(Resume resume) {
+    int result = resumeMapper.addJob(resume);
+    return result > 0 ? true : false ;
   }
 }
