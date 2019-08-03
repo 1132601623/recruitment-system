@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<meta name="Author" content="">
+<title>优才中国行</title>
+<link href="../css/css_whir.css" rel="stylesheet" type="text/css" />
+<script src="../Script/jquery-1.4.2.min.js" type="text/javascript"></script>
+
+</head>
+<body>
+
+    <!--Star-->
+    <div class="H_bodyEnd">
+    <div class="Banner"><img src="../images/temp/Ban_member.jpg" /></div>
+    <form class="Content" id="addForm">
+    
+           <!--Sidebar-->
+           <div class="Sidebar">
+           <!--#include file="../include/menu_member02.html" -->
+           </div>
+           <!--Sidebar End-->
+           <!--Right-->
+
+           <div class="RightSidebar">
+                <div class="Current">
+                    <h1 class="bgMember">欢迎回来！</h1>
+                    <dl>当前位置：<a href="../index.html">首页</a> > <span>个人中心</span></dl>
+                </div>
+                <div class="MainContent">
+
+                        <div class="People_resume">
+                            <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td width="95" align="right"><em>*</em>姓名：</td>
+                                <td><input name="pName" type="text" class="text" /></td>
+                                <td width="95" align="right"><em>*</em>出生年月：</td>
+                                <td><input name="pBirthday" type="text" class="text" /></td>
+                              </tr>
+                              <tr>
+                                <td align="right"><em>*</em>学历：</td>
+                                <td><input name="pEdu" type="text" class="text"/></td>
+                                <td width="95" align="right"><em>*</em>毕业院校：</td>
+                                <td><input name="pGradute" type="text" class="text"/></td>
+                              </tr>
+                              <tr>
+                                <td align="right"><em>*</em>专业：</td>
+                                <td><input name="pSkill" type="text" class="text"/></td>
+                                <td width="95" align="right"><em>*</em>工作年限：</td>
+                                <td><input name="pWork" type="text" class="text"/></td>
+                              </tr>
+                              <tr>
+                                <td align="right"><em>*</em>电话：</td>
+                                <td><input name="pPhone" type="text" class="text"/></td>
+                                <td width="95" align="right"><em>*</em>E-mail：</td>
+                                <td><input name="input2" type="text" class="text"/></td>
+                              </tr>
+                              <tr>
+                                <td align="right"><em>*</em>居住地：</td>
+                                <td><input name="pAddress" type="text" class="text"/></td>
+                                <td width="95" align="right"><em>*</em>求职意向：</td>
+                                <td><input name="pWanted" type="text" class="text"/></td>
+                              </tr>
+                              <tr>
+                                <td align="right">语言水平：</td>
+                                <td><input name="pLanguage" type="text" class="text"/></td>
+                                <td width="95" align="right">简历公开度：</td>
+                                <td><input name="pOpen" type="text" class="text"/></td>
+                              </tr>
+                              <tr>
+                                <td class="title" colspan="4">工作/实习经验</td>
+                              </tr>
+                              <tr>
+                                <td colspan="4"><textarea name="pExpe" cols="" rows="" class="text02">求职意向：</textarea></td>
+                              </tr>
+                              <tr>
+                                <td class="title" colspan="4">教育经历<em>*</em></td>
+                              </tr>
+                              <tr>
+                                <td colspan="4"><input name="input" type="text" class="text"/><input name="input" type="text" class="text"/><input name="input" type="text" class="text"/></td>
+                              </tr>
+
+                              <tr>
+                                <td class="title" colspan="4">培训经历<em>*</em></td>
+                              </tr>
+                              <tr>
+                                <td colspan="4"><input name="input" type="text" class="text"/><input name="input" type="text" class="text"/><input name="input" type="text" class="text"/></td>
+                              </tr>
+                              <tr>
+                                <td colspan="4"><input name="input" type="text" class="text"/><input name="input" type="text" class="text"/><input name="input" type="text" class="text"/></td>
+                              </tr>
+                              <tr>
+                                <td colspan="4" align="center"><input type="button" class="btn" onclick="return addResume()"  /></td>
+                              </tr>
+                            </table>
+                            </div>
+                  <!--End-->
+                      
+             </div>
+
+           </div>
+    </form>
+    </div>
+
+
+           <!--Right End-->
+           
+    <div class="space25"></div>
+    </div>
+    <div class="space25"></div>
+    </div>
+
+    <!--End-->
+    
+    <!--Bottom-->
+    <!--#include file="../include/bottom.html" -->
+    <!--Bottom End-->
+    
+    <script type="text/javascript" src="../Script/tab.js"></script>
+    <script type="text/javascript" language="javascript">
+		jQuery("#menu1").attr("class","acur");
+		jQuery("#tab1").attr("class","acur");
+    </script>
+
+<script type="text/javascript">
+
+function addResume () {
+        var data = $("#addForm").serialize();
+        alert(data);
+       if (data == '') {
+            alert("请填写红色*必填项信息");
+        } else {
+            $.post("../addResume", data, function (data) {
+                if (data == 'success') {
+                    location.href="./P_Index.html";
+                }
+            });
+            return false;
+        }
+    }
+
+
+</script>
+    
+</body>
+</html>

@@ -8,28 +8,39 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Work {
-    private int id;
+  private int id;
 
-    private String wName;
+  private String wName;
 
-    private String wBusiness;
+  private String wBusiness;
 
-    private String wSkill;
+  private String wSkill;
 
-    private String wAddress;
+  private String wAddress;
 
-    private String wRequest;
+  private String wRequest;
 
-    private int wPeople;
+  private int wPeople;
 
-    private String wEdu;
+  private String wEdu;
 
-    private String wYear;
+  private String wYear;
 
-    private String wWorkNature;
+  private String wWorkNature;
 
-    private String wDate;
+  private String wDate;
 
-    private String wDesc;
+  private String wDesc;
 
-    }
+  private String wBeginTime;
+
+  private String wEndTime;
+
+  private int wAge;
+
+  private int cId;
+
+  private String cName;
+
+  private String uEmail;
+}

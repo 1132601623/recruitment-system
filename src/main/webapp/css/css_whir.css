@@ -488,7 +488,7 @@ a:hover{ text-decoration:underline; color:#057056;}
 .Member_index .box li.m5{ padding-top:67px;}
 .Member_index .box li.m5 a{ padding-right:80px;}
 
-.Member_gsName{ padding:0 0 35px 0; margin:0; height:30px; line-height:30px; font-size:14px; color:#3c3d3d;}
+.Member_gsName{ padding:0 0 15px 0; margin:0; height:30px; line-height:30px; font-size:14px; color:#3c3d3d;}
 .Member_gsName img{ margin-right:10px;}
 .Member_gsName span{ float:right; color:#757575; font-size:12px; font-weight:normal; background:url(../images/member/Icon_xx.jpg) no-repeat left center; padding-left:20px;}
 .Member_gsName span em{ color:#f97500; margin:0 5px;}
@@ -565,16 +565,17 @@ a:hover{ text-decoration:underline; color:#057056;}
 .People_sidebar dt.btn a{ display:block; width:135px; height:30px;}
 
 .People_index{ font-family:"微软雅黑";}
-.People_index .box{ height:650px; overflow:hidden; background:url(../images/member/Index_menuBg02.jpg) no-repeat left top;}
+.People_index .box{ height:650px; overflow:hidden; background:url(../images/member/Index_menuBg02.png) no-repeat left top;}
 .People_index .box li{ padding:50px 0 0 155px; font-size:14px; height:52px;}
 .People_index .box li a{ color:#3b3a3a;}
+.People_index .box li.m1{ padding-top:65px;}
 .People_index .box li.m1 a{ padding-right:70px;}
-.People_index .box li.m2{ padding-top:60px;}
+.People_index .box li.m2{ padding-top:55px;}
 .People_index .box li.m2 a{ padding-right:105px;}
 .People_index .box li.m3{}
-.People_index .box li.m4{ padding-top:55px;}
+.People_index .box li.m4{ padding-top:50px;}
 .People_index .box li.m4 a{ padding-right:88px;}
-.People_index .box li.m6{ padding-top:65px;}
+.People_index .box li.m6{ padding-top:60px;}
 .People_index .box li.m6 a{ padding-right:110px;}
 
 .People_resume{}

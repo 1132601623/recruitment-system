@@ -8,23 +8,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Company {
-    private int id;
+  private int id;
 
-    private String cName;
+  private String cName;
 
-    private String cLogo;
+  private String cLogo;
 
-    private String cJob;
+  private String cJob;
 
-    private String cDesc;
+  private String cDesc;
 
-    private String cPicture;
+  private String cPicture;
 
-    private String cWeibo;
+  private String cWeibo;
 
-    private String cWechat;
+  private String cWechat;
 
-    private String cAddress;
-
-    private String cEmail;
+  private String cAddress;
 }
