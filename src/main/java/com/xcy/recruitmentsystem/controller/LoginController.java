@@ -67,7 +67,7 @@ public class LoginController {
             System.out.println(autoLogin);
             if (autoLogin != null){
                 session.setAttribute("username",user01.getUsername());
-                session.setAttribute("username",user01.getPassword());
+                session.setAttribute("password",user01.getPassword());
                 session.setAttribute("role_id",user01.getRole_id());
                 session.setAttribute("email",user01.getEmail());
                 session.setMaxInactiveInterval(60*60*24*7);
@@ -89,7 +89,7 @@ public class LoginController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setPassword(role_id);
+        user.setRole_id(role_id);
         user.setEmail(email);
         return user;
     }
