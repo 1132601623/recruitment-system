@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.recruitmentsystem.mapper.BusinessMapper">
+    <resultMap id="BaseResultMap" type="com.xcy.recruitmentsystem.pojo.Work">
+        <result column="id"  property="id" />
+        <result column="w_name"  property="wName" />
+        <result column="w_business"  property="wBusiness" />
+        <result column="w_skill"  property="wSkill" />
+        <result column="w_address"  property="wAddress" />
+        <result column="w_request"  property="wRequest" />
+        <result column="w_people"  property="wPeople" />
+        <result column="w_edu"  property="wEdu" />
+        <result column="w_year"  property="wYear" />
+        <result column="w_work_nature"  property="wWorkNature" />
+        <result column="w_date"  property="wDate" />
+        <result column="w_desc"  property="wDesc" />
+    </resultMap>
+
+    <insert id="JobPosted" parameterType="com.xcy.recruitmentsystem.pojo.Work">
+        insert into work (id, w_name, w_business,
+      w_skill, w_address, w_request,
+      w_people, w_edu, w_year,
+      w_work_nature, w_date, w_desc
+      )
+    values (null, #{wName}, #{wBusiness},
+      #{wSkill}, #{wAddress}, #{wRequest},
+      #{wPeople}, #{wEdu}, #{wYear},
+      #{wWorkNature}, #{wDate}, #{wDesc}
+      )
+
+    </insert>
+
+
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.recruitmentsystem.mapper.CompanyMapper">
+    <resultMap id="BaseResultMap" type="com.xcy.recruitmentsystem.pojo.Company">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="c_name" jdbcType="VARCHAR" property="cName" />
+        <result column="c_logo" jdbcType="VARCHAR" property="cLogo" />
+        <result column="c_job" jdbcType="VARCHAR" property="cJob" />
+        <result column="c_desc" jdbcType="VARCHAR" property="cDesc" />
+        <result column="c_picture" jdbcType="VARCHAR" property="cPicture" />
+        <result column="c_weibo" jdbcType="VARCHAR" property="cWeibo" />
+        <result column="c_wechat" jdbcType="VARCHAR" property="cWechat" />
+        <result column="c_address" jdbcType="VARCHAR" property="cAddress" />
+    </resultMap>
+    <insert id="insertCompany" parameterType="com.xcy.recruitmentsystem.pojo.Company">
+    insert into company (id, c_name, c_logo,
+      c_job, c_desc, c_picture,
+      c_weibo, c_wechat, c_address, c_email
+      )
+    values (null , #{cName}, #{cLogo},
+      #{cJob}, #{cDesc}, #{cPicture},
+      #{cWeibo}, #{cWechat}, #{cAddress}, #{cEmail}
+      )
+  </insert>
+
+</mapper>
