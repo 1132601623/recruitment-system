@@ -1,10 +1,10 @@
 package com.xcy.recruitmentsystem.controller;
 
-
 import com.xcy.recruitmentsystem.pojo.Company;
 import com.xcy.recruitmentsystem.service.CompanyService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +20,10 @@ import java.util.UUID;
 @Controller
 public class CompanyController {
 
-    //@Value("${IMAGE_DIR}")
+    @Value("${IMAGE_DIR}")
     String imageDir;
 
-    //@Value("${IMAGE_URL}")
+    @Value("${IMAGE_URL}")
     String imageURL;
 
     @Autowired
