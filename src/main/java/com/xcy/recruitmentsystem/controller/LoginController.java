@@ -78,6 +78,7 @@ public class LoginController {
                 session.removeAttribute("email");
             }
         }
+        user01.setPassword("saodhfsajasjdfljkzhfasdfhsddjf");
         return user01;
     }
     @RequestMapping("/autoLogin")
@@ -91,6 +92,7 @@ public class LoginController {
         user.setPassword(password);
         user.setRole_id(role_id);
         user.setEmail(email);
+        user.setPassword("ygugfhqbuyegdhbfgyyweblkdjfydsfjsdd");
         return user;
     }
     @RequestMapping("/loginOut")
