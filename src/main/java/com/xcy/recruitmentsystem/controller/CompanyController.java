@@ -5,14 +5,11 @@ import com.xcy.recruitmentsystem.pojo.Company;
 import com.xcy.recruitmentsystem.service.CompanyService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -23,10 +20,10 @@ import java.util.UUID;
 @Controller
 public class CompanyController {
 
-    @Value("${IMAGE_DIR}")
+    //@Value("${IMAGE_DIR}")
     String imageDir;
 
-    @Value("${IMAGE_URL}")
+    //@Value("${IMAGE_URL}")
     String imageURL;
 
     @Autowired
