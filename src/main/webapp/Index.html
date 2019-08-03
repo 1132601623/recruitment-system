@@ -8,11 +8,88 @@
 <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
 <script src="Script/jquery-1.4.2.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="Script/tab.js"></script>
+    <script type="text/javascript" src="Script/jquery.cookie.js"></script>
 <!--[if IE 6]>
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
+<script type="text/javascript">
+    var role_id = null;
+    function Login(id) {
+        role_id = id;
+        var jid = $.cookie("JSESSIONID")
+        var date = $("#form01").serialize();
+        $.post("userLogin",date,function (date) {
+            if (date.username != null){
+                if (date.username != ""){
+                    if (id == 1){
+                        //location.href = "个人登录成功跳转页面";
+                        $("#id01").hide();
+                        $("#id02").show();
+                        $("#AutoTable1").css("display","none");
+                        $("#id03").text(date.username)
+                    } else{
+                        //location.href = "企业登录成功跳转页面";
+                        $("#id01").hide();
+                        $("#id02").show();
+                        $("#loginBox").hide();
+                        $("#AutoTable1").css("display","none");
+                        $("#id03").text(date.username)
+                    }
+                }
+            } else {
+                $(".div001").css("color","red").show();
+                $(".div002").hide();
+            }
 
+        })
+    }
+    window.onload=function (ev) {
+        $(".div001").hide();
+        $.post("autoLogin",null,function (date) {
+            var role = date.role_id;
+            if (role==null){
+            } else {
+                if (role == 1){
+                    //location.href = "个人登录";
+                    $("#id01").hide();
+                    $("#id02").show();
+                    $("#AutoTable1").css("display","none");
+                    $("#id03").text(date.username)
+                } else {
+                    //location.href = "企业登录";
+                    $("#id01").hide();
+                    $("#id02").show();
+                    $("#AutoTable1").css("display","none");
+                    $("#id03").text(date.username)
+                }
+
+            }
+        })
+    }
+    function loginOut() {
+        $.post("loginOut",null,function (date) {
+            if (date == "success"){
+                $("#id01").show();
+                $("#id02").hide();
+                $("#AutoTable1").show();
+                $("#id03").text(date.username)
+            }
+        })
+    }
+    function writeInfo01() {
+        $(".div001").hide();
+        $(".div002").show();
+        $("#input01").val("")
+        $("#input03").val("")
+    }
+    function writeInfo02() {
+        $(".div001").hide();
+        $(".div002").show();
+        $("#input02").val("")
+        $("#input04").val("")
+    }
+</script>
 </head>
 <body class="Home_bodyBg">
     
@@ -20,8 +97,8 @@
         <div class="header">
     <div class="box">
         <h3 class="logo"><a href="Index.html"></a></h3>
-        <div class="logIn"><a href="member/Login.html">登录</a>|<a href="member/Register.html">注册</a></div>
-        <div class="logOut">欢迎您<b>偶no！</b><a href="#">退出登录</a></div>
+        <div class="logIn" id="id01"><a href="Login.html">登录</a>|<a href="Register.html">注册</a></div>
+        <div class="logOut" id="id02">欢迎您<b id="id03">偶no！</b><a href="" onclick="loginOut()">退出登录</a></div>
         <dl class="addnav"><a href="Index.html">加入收藏</a><a href="sitemap.html">网站地图</a></dl>
         <div class="frBtn"><a href="member/Index.html" class="a1">个人中心</a><a href="#" class="a2">手机版</a></div>
         <div class="mainnav">
@@ -89,38 +166,44 @@
                             <span></span>
                        </h2>
                        <div class="box" name="AutoContent">
-                             
                               <!--1-->
                               <div class="bg01">
-                                   <div class="textBg"><input name="" type="text" class="text" value="输入用户名"/></div>
-                                   <div class="textBg"><input name="" type="text" class="text" value="输入密码"/></div>
-                                   <dl><input name="" type="checkbox" value="" />自动登录<a href="member/Password.html">忘记密码</a></dl>
+                                  <form id="form01">
+
+                                   <div class="textBg"><input name="username" id="input01" onfocus="writeInfo01()" type="text" class="text" placeholder="请输入用户名"/></div>
+                                   <div class="textBg"><input name="password" id="input02"  onfocus="writeInfo02()" type="password" class="text" placeholder="请输入密码"/></div>
+                                   <div class="div001"  style="color: white;display: none;"><sapn>用户名或者密码错误</sapn>&nbsp;&nbsp;<a href="Password.html" style="color: white;" >忘记密码</a></div>
+                                   <div class="div002" style="color: white;"><input name="autoLogin" type="checkbox" value="autoLogin" />7天内自动登录 &nbsp;&nbsp;<a href="Password.html" style="color: white;">忘记密码</a></div>
                                    <em><a href="member/P_CnResume.html">我要填写简历</a></em>
-                                   <input name="" type="button" class="btn01" value=""/>
-                                   <input name="" type="button" class="btn02" value=""/>
+                                   <input name="" onclick="Login(1)" type="button" class="btn01" value=""/>
+                                   <a href="Register.html"><input name="" style="padding-top: 35px;" type="button" class="btn02" value=""/></a>
+                                  </form>
                               </div>
                               <!--1 End-->
                               <!--2-->
                               <div class="bg02">
-                                   <div class="textBg"><input name="" type="text" class="text" value="输入用户名"/></div>
-                                   <div class="textBg"><input name="" type="text" class="text" value="输入密码"/></div>
-                                   <dl><input name="" type="checkbox" value="" />自动登录<a href="member/Password.html">忘记密码</a></dl>
-                                   <em><a href="member/P_CnResume.html">我要填写简历</a></em>
-                                   <input name="" type="button" class="btn01" value=""/>
-                                   <input name="" type="button" class="btn02" value=""/>
+                                  <form id="form02">
+                                   <div class="textBg"><input name="username" id="input03" onfocus="writeInfo01()"  type="text" class="text" placeholder="请输入用户名"/></div>
+                                   <div class="textBg"><input name="password" id="input04" onfocus="writeInfo02()"  type="password" class="text" placeholder="请输入密码"/></div>
+                                      <div class="div001"  style="color: white;display: none;"><sapn>用户名或者密码错误</sapn>&nbsp;&nbsp;<a href="Password.html" style="color: white;" >忘记密码</a></div>
+                                      <div class="div002" style="color: white;"><input name="autoLogin" type="checkbox" value="autoLogin" />7天内自动登录 &nbsp;&nbsp;<a href="Password.html" style="color: white;">忘记密码</a></div>
+                                      <em><a href="member/P_CnResume.html">我要填写简历</a></em>
+                                      <input style="" name="" onclick="Login(2)"  type="button" class="btn01" value=""/>
+                                      <a href="Register.html"><input name="" type="button" class="btn02" value=""/></a>
+                                  </form>
                               </div>
                               <!--2 End-->
-                              
+
                        </div>
                </div>
                <!--登陆框 End-->
                <!--最新招聘会-->
-               <div class="H_jobBox" id="AutoTable2">
+               <div class="H_jobBox" id="AutoTable2" id="loginBox">
                        <h2>
                             <span></span>
                             <span></span>
                        </h2>
-                       <div class="box" name="AutoContent">
+                       <div class="box" name="AutoContent" id="box">
                              
                               <!--1-->
                               <div class="bg01">

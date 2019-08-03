@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -54,13 +57,50 @@ public class LoginController {
         int count = loginService.RegisterUser(user);
         return count > 0 ? "success" : "fail";
     }
+
     //登录
     @RequestMapping("/userLogin")
-    public User userLogin(User user){
+    public User userLogin(User user, HttpSession session){
         User user01 = loginService.userLogin(user);
+        if (user01 != null){
+            String autoLogin = user.getAutoLogin();
+            System.out.println(autoLogin);
+            if (autoLogin != null){
+                session.setAttribute("username",user01.getUsername());
+                session.setAttribute("username",user01.getPassword());
+                session.setAttribute("role_id",user01.getRole_id());
+                session.setAttribute("email",user01.getEmail());
+                session.setMaxInactiveInterval(60*60*24*7);
+            } else {
+                session.removeAttribute("username");
+                session.removeAttribute("password");
+                session.removeAttribute("role_id");
+                session.removeAttribute("email");
+            }
+        }
         return user01;
     }
-
+    @RequestMapping("/autoLogin")
+    public User autoLogin(HttpSession session){
+        String username = (String) session.getAttribute("username");
+        String password = (String) session.getAttribute("password");
+        String role_id = (String) session.getAttribute("role_id");
+        String email = (String) session.getAttribute("email");
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setPassword(role_id);
+        user.setEmail(email);
+        return user;
+    }
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpSession session){
+        session.removeAttribute("username");
+        session.removeAttribute("password");
+        session.removeAttribute("role_id");
+        session.removeAttribute("email");
+        return "success";
+    }
     //修改密码时验证用户名密码是否匹配
     @RequestMapping("/validateUserAndEmail")
     public int validateUserAndEmail(String username,String email){
