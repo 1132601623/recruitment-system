@@ -10,5 +10,11 @@ import java.util.List;
 public interface ResumeService {
   void addResume(Resume resume);
 
-  List<Resume> findJobByMessage(Work work);
+  List<Work> findJobByMessage(Work work);
+
+  List<Work> findJob();
+
+  Resume findResumeByEmail(String email);
+
+    boolean addJob(Resume resume);
 }

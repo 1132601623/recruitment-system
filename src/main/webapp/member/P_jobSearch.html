@@ -41,7 +41,9 @@
                 <!--Star-->
                 <h2 class="Member_tab"><a id="tab1" href="P_jobSearch.html">个人职位搜索器</a></h2>
                 <div class="space10"></div>
+                <form id="form1">
                 <table border="0" cellspacing="0" cellpadding="0" class="Apply_manage">
+
                     <tr>
                         <td class="name">职能分类：</td>
                         <td><select name="">
@@ -54,22 +56,27 @@
                     </tr>
                     <tr>
                         <td class="name">发布日期：</td>
-                        <td><input name="input" type="text" class="text"/></td>
+                        <td><input name="wDate" type="text" class="text"/></td>
                         <td class="name">关键字：</td>
                         <td><input name="input2" type="text" class="text"/></td>
                     </tr>
                     <tr>
                         <td class="name">&nbsp;</td>
-                        <td><input name="input3" type="button" class="btn" value=""/></td>
+                        <td><input name="input3" type="button" class="btn" value="" onclick="showJob()"/></td>
                         <td class="name">&nbsp;</td>
                         <td align="right">&nbsp;</td>
                     </tr>
+
                 </table>
+                </form>
                 <div class="space10"></div>
                 <div class="Manage_list">
                     <table id="table" border="0" width="100%" cellspacing="0" cellpadding="0">
+                        <tbody>
+
+
                         <tr class="title">
-                            <td>简历名称</td>
+                            <td>公司名称</td>
                             <td>职位名称</td>
                             <td>学历</td>
                             <td>年龄</td>
@@ -77,10 +84,12 @@
                             <td>更新日期</td>
                             <td>&nbsp;</td>
                         </tr>
+                        </tbody>
+                        <tbody id="tr"></tbody>
                     </table>
                     <dl>
                         <input name="" type="checkbox" value=""/>全选
-                        <a href="#" class="bule">申请</a>
+                        <a href="#" class="bule" onclick="return addJob()">申请</a>
                     </dl>
                     <!--Pages-->
                     <div class="Pages">
@@ -122,24 +131,70 @@
 </script>
 
 <script type="text/javascript">
-    $(function () {
-        $.get("../findJobByMessage", null, function (data) {
+
+    function showJob() {
+        var data = $("#form1").serialize();
+        $("#tr").html('');
+        $.get("../findJobByMessage",data,function (data) {
             loadData(data);
-            alert(data);
+        });
+    }
+
+    function loadData(data) {
+
+        $(data).each(function () {
+            var tr = "<tr><td>" +"<input name='' type='checkbox' value=''/>" + this.cname + "</td>"
+                + "<td>" + this.wname + "</td>"
+                + "<td>" + this.wedu + "</td>"
+                + "<td>" + this.wage + "</td>"
+                + "<td>" + this.wyear + "</td>"
+                + "<td>" + this.wdate + "</td></tr>";
+            $("#tr").append(tr);
+
+        });
+
+    }
+
+    $(function () {
+        $.get("../findJob", null, function (data) {
+            loadData(data);
         });
     });
 
 
     function loadData(data) {
+
         $(data).each(function () {
-            var tr = "<tr><td>" + 123 + "</td>"
-            "<td>" + 456 + "</td>"
-            "<td>" + this.pEdu + "</td></tr>";
-            $("#table").append(tr);
+            var tr = "<tr><td>" +"<input name='cks' type='checkbox' value=''/>" + this.cname + "</td>"
+            + "<td>" + this.wname + "</td>"
+                + "<td>" + this.wedu + "</td>"
+                + "<td>" + this.wage + "</td>"
+                + "<td>" + this.wyear + "</td>"
+            + "<td>" + this.wdate + "</td></tr>";
+            $("#tr").append(tr);
+
 
         });
 
     }
+
+
+    function addJob() {
+        $.get("../findResumeByEmail",null, function (data) {
+            var data = data;
+           
+            $.get("../addJob", data, function (data) {
+                if (data == 'success') {
+                    alert("投递成功");
+                    location.href="../P_feedback.html";
+                } else {
+                    alert("此岗位已停止招聘");
+                }
+            });
+        });
+    }
+
+
 
 </script>
 </body>

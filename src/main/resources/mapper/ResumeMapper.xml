@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xcy.recruitmentsystem.mapper.ResumeMapper">
-    <resultMap id="BaseResultMap" type="com.xcy.recruitmentsystem.pojo.Resume">
+    <resultMap id="resumeMap" type="com.xcy.recruitmentsystem.pojo.Resume">
         <id column="id" property="id"/>
         <result column="p_name" property="pName"/>
         <result column="p_birthday" property="pBirthday"/>
@@ -35,6 +35,9 @@
         <result column="w_work_nature" jdbcType="VARCHAR" property="wWorkNature"/>
         <result column="w_date" jdbcType="VARCHAR" property="wDate"/>
         <result column="w_desc" jdbcType="VARCHAR" property="wDesc"/>
+        <result column="w_age" javaType="INTEGER" property="wAge"/>
+        <result column="c_id" property="cId"/>
+        <result column="c_name" property="cName"/>
     </resultMap>
     <insert id="addResume" parameterType="resume">
 insert into resume values (null, #{pName}, #{pBirthday},
@@ -46,17 +49,30 @@ insert into resume values (null, #{pName}, #{pBirthday},
     </insert>
 
     <select id="findJobByMessage" parameterType="work" resultMap="workMap">
-        select * from work
+        select work.*, company.c_name as cName from work, company
         <where>
+        work.c_id = company.id
             <if test="wBusiness != null and wBusiness != ''">
-                w_business = #{wBusiness}
+                and w_business like CONCAT('%',#{wBusiness},'%')
             </if>
             <if test="wSkill != null and wSkill != ''">
-                and w_skill = #{wSkill}
+                and w_skill like CONCAT('%',#{wSkill},'%')
             </if>
             <if test="wDate != null and wDate != ''">
-                and w_date = #{wDate}
+                and w_date like CONCAT('%',#{wDate},'%')
             </if>
         </where>
     </select>
+
+    <select id="findJob" resultMap="workMap">
+        select work.*, company.c_name as cName from work, company
+    </select>
+
+    <select id="findResumeByEmail" resultMap="resumeMap" parameterType="string">
+        select * from resume where u_email = #{email}
+    </select>
+
+    <update id="addJob" parameterType="resume">
+        update work set r_id = #{id} where id =2
+    </update>
 </mapper>
