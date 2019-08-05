@@ -13,7 +13,9 @@
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
 
+
 </head>
+
 <body>
 
 <!--top-->
@@ -42,32 +44,35 @@
                 <h2 class="Member_tab"><a id="tab1" href="P_jobSearch.html">个人职位搜索器</a></h2>
                 <div class="space10"></div>
                 <form id="form1">
-                <table border="0" cellspacing="0" cellpadding="0" class="Apply_manage">
+                    <table border="0" cellspacing="0" cellpadding="0" class="Apply_manage">
 
-                    <tr>
-                        <td class="name">职能分类：</td>
-                        <td><select name="">
-                            <option>----请选择----</option>
-                        </select></td>
-                        <td class="name">行业分类：</td>
-                        <td><select name="">
-                            <option>----请选择----</option>
-                        </select></td>
-                    </tr>
-                    <tr>
-                        <td class="name">发布日期：</td>
-                        <td><input name="wDate" type="text" class="text"/></td>
-                        <td class="name">关键字：</td>
-                        <td><input name="input2" type="text" class="text"/></td>
-                    </tr>
-                    <tr>
-                        <td class="name">&nbsp;</td>
-                        <td><input name="input3" type="button" class="btn" value="" onclick="showJob()"/></td>
-                        <td class="name">&nbsp;</td>
-                        <td align="right">&nbsp;</td>
-                    </tr>
+                        <tr>
+                            <td class="name">职能分类：</td>
+                            <td><select id="skill" onchange="showId()">
+                                <option>----请选择----</option>
+                                <input id="wSkill" type="hidden" name="wSkill"/>
 
-                </table>
+                            </select></td>
+                            <td class="name">行业分类：</td>
+                            <td><select id="business" onchange="showName()">
+                                <option>----请选择----</option>
+                                <input id="wBusiness" type="hidden" name="wBusiness"/>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td class="name">发布日期：</td>
+                            <td><input name="wDate" type="text" class="text"/></td>
+                            <td class="name">关键字：</td>
+                            <td><input name="input2" type="text" class="text"/></td>
+                        </tr>
+                        <tr>
+                            <td class="name">&nbsp;</td>
+                            <td><input name="input3" type="button" class="btn" value="" onclick="showJob()"/></td>
+                            <td class="name">&nbsp;</td>
+                            <td align="right">&nbsp;</td>
+                        </tr>
+
+                    </table>
                 </form>
                 <div class="space10"></div>
                 <div class="Manage_list">
@@ -79,7 +84,6 @@
                             <td>公司名称</td>
                             <td>职位名称</td>
                             <td>学历</td>
-                            <td>年龄</td>
                             <td>工作年限</td>
                             <td>更新日期</td>
                             <td>&nbsp;</td>
@@ -135,7 +139,7 @@
     function showJob() {
         var data = $("#form1").serialize();
         $("#tr").html('');
-        $.get("../findJobByMessage",data,function (data) {
+        $.get("../findJobByMessage", data, function (data) {
             loadData(data);
         });
     }
@@ -143,7 +147,7 @@
     function loadData(data) {
 
         $(data).each(function () {
-            var tr = "<tr><td>" +"<input name='' type='checkbox' value=''/>" + this.cname + "</td>"
+            var tr = "<tr><td>" + "<input name='' type='checkbox' value=''/>" + this.cname + "</td>"
                 + "<td>" + this.wname + "</td>"
                 + "<td>" + this.wedu + "</td>"
                 + "<td>" + this.wage + "</td>"
@@ -165,28 +169,25 @@
     function loadData(data) {
 
         $(data).each(function () {
-            var tr = "<tr><td>" +"<input name='cks' type='checkbox' value=''/>" + this.cname + "</td>"
-            + "<td>" + this.wname + "</td>"
+            var tr = "<tr><td>" + "<input name='cks' id='checkbox' type='checkbox' onclick='showId(this,this.id)'/>" + this.cname + "</td>"
+                + "<td>" + this.wname + "</td>"
                 + "<td>" + this.wedu + "</td>"
-                + "<td>" + this.wage + "</td>"
                 + "<td>" + this.wyear + "</td>"
-            + "<td>" + this.wdate + "</td></tr>";
+                + "<td>" + this.wdate + "</td></tr>";
             $("#tr").append(tr);
-
-
         });
 
     }
 
 
     function addJob() {
-        $.get("../findResumeByEmail",null, function (data) {
+        $.get("../findResumeByEmail", null, function (data) {
             var data = data;
-           
-            $.get("../addJob", data, function (data) {
+
+            $.get("../sendResume", data, function (data) {
                 if (data == 'success') {
                     alert("投递成功");
-                    location.href="../P_feedback.html";
+                    location.href = "./P_feedback.html";
                 } else {
                     alert("此岗位已停止招聘");
                 }
@@ -194,6 +195,29 @@
         });
     }
 
+    function showId(obj) {
+        var skill = $("#skill option:checked").text();
+        $("#wSkill").val(skill);
+    }
+
+    function showName(obj) {
+        var business = $("#business option:checked").text();
+        $("#wBusiness").val(business);
+    }
+
+    $(function () {
+        $.post("../findJob", null, function (data) {
+            $(data).each(function () {
+                var skill = $("#skill");
+                var option = "<option value='" + this.id + "'>" + this.wskill + "</option>";
+                skill.append(option);
+
+                var business = $("#business");
+                var option2 = "<option value='" + this.id + "'>" + this.wbusiness + "</option>";
+                business.append(option2);
+            });
+        });
+    });
 
 
 </script>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xcy.recruitmentsystem.mapper.WorkMapper">
+    <resultMap id="workMap" type="com.xcy.recruitmentsystem.pojo.Work">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="w_name" property="wName" jdbcType="VARCHAR"/>
+        <result column="w_business" property="wBusiness" jdbcType="VARCHAR"/>
+        <result column="w_skill" property="wSkill" jdbcType="VARCHAR"/>
+        <result column="w_address" property="wAddress" jdbcType="VARCHAR"/>
+        <result column="w_request" property="wRequest" jdbcType="VARCHAR"/>
+        <result column="w_people" property="wPeople" jdbcType="INTEGER"/>
+        <result column="w_edu" property="wEdu" jdbcType="VARCHAR"/>
+        <result column="w_year" property="wYear" jdbcType="VARCHAR"/>
+        <result column="w_work_nature" property="wWorkNature" jdbcType="VARCHAR"/>
+        <result column="w_date" property="wDate" jdbcType="VARCHAR"/>
+        <result column="w_desc" property="wDesc" jdbcType="VARCHAR"/>
+        <result column="w_begin_time" property="wBeginTime" jdbcType="VARCHAR"/>
+        <result column="w_end_time" property="wEndTime" jdbcType="VARCHAR"/>
+        <result column="w_age" property="wAge" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="findWorkByState" resultMap="workMap">
+      select work.* from work, resume where work.r_id = resume.id and resume.p_state != 'null'
+  </select>
+</mapper>
