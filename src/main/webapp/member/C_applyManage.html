@@ -12,6 +12,94 @@
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 
+    <script>
+        
+        $(function() {
+            
+            $.post("../findAllResume",null,function (data) {
+
+                $(data).each(function () {
+            //1.获取select
+                    var pExpe = $("#pExpe");
+                    var option = "<option >"+this.pExpe+"</option>";
+
+                    pExpe.append(option);
+                })
+            })
+        });
+
+        $(function() {
+
+            $.post("../findAllResume",null,function (data) {
+
+                $(data).each(function () {
+
+                    var pAddress = $("#pAddress");
+                    var option = "<option >"+this.pAddress+"</option>";
+
+                    pAddress.append(option);
+                })
+            })
+        });
+        $(function() {
+
+            $.post("../findAllResume",null,function (data) {
+
+                $(data).each(function () {
+
+                    var pEdu = $("#pEdu");
+                    var option = "<option >"+this.pEdu+"</option>";
+
+                    pEdu.append(option);
+                })
+            })
+        });
+        $(function() {
+
+            $.post("../findAllResume",null,function (data) {
+
+                $(data).each(function () {
+
+                    var pWork = $("#pWork");
+                    var option = "<option >"+this.pWork+"</option>";
+
+                    pWork.append(option);
+                })
+            })
+        });
+
+        function a() {
+           var pe = $("#pExpe option:selected").text();
+           $("#pExpe1").val(pe);
+        }
+        function b() {
+            var pa = $("#pAddress option:selected").text();
+            $("#pAddress1").val(pa);
+        }
+        function c() {
+            var pd = $("#pEdu option:selected").text();
+            $("#pEdu1").val(pd);
+        }
+        function d() {
+            var pw = $("#pWork option:selected").text();
+            $("#pWork1").val(pw);
+        }
+        
+        var fo = $("form").serialize();
+        $.post("",fo,function (data) {
+            $(data).each(
+                function (i, values) {
+                    $("#list").append(
+                        "<td style='padding-top: 15px'>" + values.pName + "</td>"
+                        + "<td style='padding-top: 15px'>" + values.pWanted + "</td>"
+                        + "<td style='padding-top: 15px'>" + values.pEdu + "</td>"
+                        + "<td style='padding-top: 15px'>" + values.pWork + "</td>"
+
+                    );
+                }
+            );
+        })
+    </script>
 </head>
 <body>
     
@@ -40,101 +128,54 @@
                         <!--Star-->
                         <!--#include file="../include/menu_memberC2.html" -->
                         <div class="space10"></div>
+                    <form>
                         <table border="0" cellspacing="0" cellpadding="0" class="Apply_manage">
                             <tr>
-                              <td class="name">职能分类：</td>
-                              <td><select name=""><option>----请选择----</option></select></td>
+                              <td class="name">求职意向：</td>
+                              <td><select id="pExpe" onchange="a()">
+                                  <option>----请选择----</option>
+                              </select>
+                              </td>
+
                               <td class="name">居住地：</td>
-                              <td><select name=""><option>----请选择----</option></select></td>
+                              <td><select id="pAddress" onchange="b()">
+                                  <option>----请选择----</option>
+                              </select>
+                              </td>
                             </tr>
+
                             <tr>
-                              <td class="name">分类：</td>
-                              <td><select name=""><option>----请选择----</option></select></td>
+                              <td class="name">学历：</td>
+                              <td><select id="pEdu" onchange="c()"><option>----请选择----</option></select></td>
                               <td class="name">工作年限：</td>
-                              <td><select name=""><option>----请选择----</option></select></td>
+                              <td><select id="pWork" onchange="d()"><option>----请选择----</option></select></td>
                             </tr>
                             <tr>
-                              <td class="name">关键字：</td>
-                              <td><input name="" type="text" class="text"/></td>
-                              <td class="name">&nbsp;</td>
-                              <td align="right"><input name="" type="button" class="btn" value="" /></td>
+                                <td class="name">&nbsp;</td>
+                                <td style="padding-right: 100px"><input  type="button" class="btn" ></td>
                             </tr>
+                            <input id="pExpe1" type="hidden" value=""/>
+                            <input id="pAddress1" type="hidden" value=""/>
+                            <input id="pEdu1" type="hidden" value=""/>
+                            <input id="pWork1" type="hidden" value=""/>
                         </table>
+                    </form>
+
                         <div class="space10"></div>
                         <div class="Manage_list">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                   <tr class="title">
-                                    <td>简历名称</td>
-                                    <td>职位名称</td>
+                                    <td>姓名</td>
+                                    <td>求职意向</td>
                                     <td>学历</td>
-                                    <td>年龄</td>
                                     <td>工作年限</td>
                                     <td>更新日期</td>
                                     <td>&nbsp;</td>
                                   </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" /><a href="C_applyManageInfo.html">电子商务经理/主管 6年工作经验 深圳</a></td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>  
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
+                                    <tr id="list">
+
+                                    </tr>
+
                                 </table>
                                 <dl>
                                      <input name="" type="checkbox" value="" />全选

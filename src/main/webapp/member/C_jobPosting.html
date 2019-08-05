@@ -11,7 +11,18 @@
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-
+<script type="text/javascript">
+    
+    function upload() {
+        var form = $("form").serialize();
+        $.post("../jobPosting",form,function (data) {
+            if (data == "success"){
+                location.href = "Index.html"
+            }
+        })
+    }
+</script>
+    
 </head>
 <body>
     
@@ -41,14 +52,15 @@
                         <!--#include file="../include/menu_memberC1.html" -->
 												
                         <div class="JobPosting">
+                            <form >
                               <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
                                   <td class="name">行业分类：</td>
-                                  <td><select name="wBusiness"><option>----请选择----</option></select></td>
+                                  <td><input name="wBusiness" type="text" class="text"/></td>
                                 </tr>
                                 <tr>
                                   <td class="name">职能分类：</td>
-                                  <td><select name="wSkill"><option>----请选择----</option></select></td>
+                                  <td><input name="wSkill" type="text" class="text"/></td>
                                 </tr>
                                 <tr>
                                   <td class="name">职位名：</td>
@@ -56,7 +68,7 @@
                                 </tr>
                                 <tr>
                                   <td class="name">工作地点：</td>
-                                  <td><select name="wAddress"><option>----请选择----</option></select></td>
+                                  <td><input name="wAddress" type="text" class="text"/></td>
                                 </tr>
                                 <tr>
                                   <td class="name">专业要求：</td>
@@ -76,7 +88,7 @@
                                 </tr>
                                 <tr>
                                   <td class="name">工作性质：</td>
-                                  <td><input name="wWorkNature" type="radio" value="" />全职<input name="" type="radio" value="" />实习</td>
+                                  <td><input name="wWorkNature" type="radio" class="radio-inline" value="全职" />全职<input name="wWorkNature" type="radio" class="radio-inline" value="实习" />实习</td>
                                 </tr>
                                 <tr>
                                   <td class="name">发布日期：</td>
@@ -84,13 +96,14 @@
                                 </tr>
                                 <tr>
                                   <td class="name" valign="top">职位描述：</td>
-                                  <td><textarea name="wDesc" class="text02">请输入...</textarea></td>
+                                  <td><textarea name="wDesc" class="text02"></textarea></td>
                                 </tr>
                                 <tr>
                                   <td>&nbsp;</td>
-                                  <td><input name="" type="button" class="btn" value=""/></td>
+                                  <td><input name="" type="button" class="btn" onclick="upload()"/></td>
                                 </tr>
                               </table>
+                            </form>
                         </div>
                         <!--End-->
                       
