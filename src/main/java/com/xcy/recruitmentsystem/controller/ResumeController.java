@@ -66,4 +66,10 @@ public class ResumeController {
         return resumeList;
     }
 
+    // 查看简历
+    @RequestMapping("/findResumeById")
+    public Resume findResumeById(int id) {
+        Resume resume = resumeService.findResumeById(id);
+        return resume;
+    }
 }

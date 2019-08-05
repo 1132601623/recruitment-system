@@ -19,4 +19,6 @@ public interface ResumeMapper {
     List<Resume> findAllResume(Resume resume);
 
     int sendResume(Resume resume);
+
+    Resume findResumeById(int id);
 }

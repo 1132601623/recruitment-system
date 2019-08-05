@@ -81,4 +81,8 @@ insert into resume values (null, #{pName}, #{pBirthday},
     <select id="findAllResume" resultMap="resumeMap">
         select * from resume
     </select>
+
+    <select id="findResumeById" resultMap="resumeMap" parameterType="int">
+        select * from resume where id = #{id}
+    </select>
 </mapper>

@@ -19,4 +19,6 @@ public interface ResumeService {
     List<Resume> findAllResume(Resume resume);
 
     boolean sendResume(Resume resume);
+
+    Resume findResumeById(int id);
 }
