@@ -24,7 +24,6 @@ public class InternshipController {
     @RequestMapping("/getBusiness")
     public List<Work> getBusiness() {
         List<Work> works = internshipService.getBusiness();
-        System.out.println("1111");
         return works;
     }
 }
