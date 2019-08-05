@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xcy.recruitmentsystem.mapper.InternshipMapper" >
+  <resultMap id="BaseResultMap" type="com.xcy.recruitmentsystem.pojo.Work" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="w_name" property="wName" jdbcType="VARCHAR" />
+    <result column="w_business" property="wBusiness" jdbcType="VARCHAR" />
+    <result column="w_skill" property="wSkill" jdbcType="VARCHAR" />
+    <result column="w_address" property="wAddress" jdbcType="VARCHAR" />
+    <result column="w_request" property="wRequest" jdbcType="VARCHAR" />
+    <result column="w_people" property="wPeople" jdbcType="INTEGER" />
+    <result column="w_edu" property="wEdu" jdbcType="VARCHAR" />
+    <result column="w_year" property="wYear" jdbcType="VARCHAR" />
+    <result column="w_work_nature" property="wWorkNature" jdbcType="VARCHAR" />
+    <result column="w_date" property="wDate" jdbcType="VARCHAR" />
+    <result column="w_desc" property="wDesc" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="selectAllSql">
+    select * from work
+  </sql>
+
+  <sql id="selectWhereSql">
+    <where>
+      <if test="wBusiness != null and wBusiness != ''">
+          wBusiness like concat('%',#{wBusiness},'%')
+      </if>
+
+      <if test="wAddress != null and wAddress != ''">
+         and wAddress like concat ('%',#{wAddress},'%')
+      </if>
+
+      <if test="wSkill != null and wSkill != ''">
+         and wSkill like concat ('%',#{wSkill},'%')
+      </if>
+
+      <if test="wDate != null and wDate != ''">
+         and wDate like concat ('%',#{wDate},'%')
+      </if>
+    </where>
+  </sql>
+  <select id="blurrySelectInternship" resultMap="BaseResultMap">
+        <include refid="selectAllSql"></include>
+        <include refid="selectWhereSql"></include>
+  </select>
+
+  <select id="getBusiness" resultMap="BaseResultMap">
+      <include refid="selectAllSql"></include>
+  </select>
+
+
+</mapper>
