@@ -47,10 +47,11 @@ public class ResumeController {
     }
 
     // 投递简历
-    @RequestMapping("/addJob")
-    public String addJob(Resume resume) {
-        boolean count = resumeService.addJob(resume);
-        if (count){
+    @RequestMapping("/sendResume")
+    public String sendResume(Resume resume) {
+        System.out.println(resume);
+        boolean count = resumeService.sendResume(resume);
+        if (count) {
             return "success";
         } else {
             return "fail";
@@ -59,8 +60,10 @@ public class ResumeController {
 
     // 查询所有简历
     @RequestMapping("/findAllResume")
-    public List<Resume> findResume() {
-        List<Resume> resumeList = resumeService.findAllResume();
+    public List<Resume> findResume(Resume resume) {
+        List<Resume> resumeList = resumeService.findAllResume(resume);
+        System.out.println(resumeList);
         return resumeList;
     }
+
 }

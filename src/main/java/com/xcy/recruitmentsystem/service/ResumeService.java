@@ -8,15 +8,15 @@ import java.util.List;
 
 @Service
 public interface ResumeService {
-  void addResume(Resume resume);
+    void addResume(Resume resume);
 
-  List<Work> findJobByMessage(Work work);
+    List<Work> findJobByMessage(Work work);
 
-  List<Work> findJob();
+    List<Work> findJob();
 
-  Resume findResumeByEmail(String email);
+    Resume findResumeByEmail(String email);
 
-    boolean addJob(Resume resume);
+    List<Resume> findAllResume(Resume resume);
 
-    List<Resume> findAllResume();
+    boolean sendResume(Resume resume);
 }

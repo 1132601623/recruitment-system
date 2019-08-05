@@ -40,4 +40,6 @@ public class Resume {
 
   private String pStudyExpe;
   private String pMyself;
+  private String pState;
+  private String uEmail;
 }
