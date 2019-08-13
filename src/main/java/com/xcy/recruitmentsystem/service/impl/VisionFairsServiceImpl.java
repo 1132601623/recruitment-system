@@ -15,7 +15,14 @@ public class VisionFairsServiceImpl implements VisionFairsService {
     VisionFairsMapper visionFairsMapper;
 
     @Override
-    public List<Work> blurrySelectVisionFairs() {
-        return visionFairsMapper.blurrySelectVisionFairs();
+    public List<Work> blurrySelectVisionFairs(Work work) {
+        return visionFairsMapper.blurrySelectVisionFairs(work);
     }
+
+    @Override
+    public List<Work> getMessage() {
+        List<Work> message = visionFairsMapper.getMessage();
+        return message;
+    }
+
 }

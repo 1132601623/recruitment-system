@@ -14,12 +14,13 @@ public class InternshipServiceImpl implements InternshipService {
     InternshipMapper internshipMapper;
 
     @Override
-    public List<Work> blurrySelectInternship() {
-        return internshipMapper.blurrySelectInternship();
+    public List<Work> blurrySelectInternship(Work work) {
+        return internshipMapper.blurrySelectInternship(work);
     }
 
     @Override
     public List<Work> getBusiness() {
         return internshipMapper.getBusiness();
     }
+
 }

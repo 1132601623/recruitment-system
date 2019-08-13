@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface InternshipService {
 
-    List<Work> blurrySelectInternship();
+    List<Work> blurrySelectInternship(Work work);
 
     List<Work> getBusiness();
+
 }

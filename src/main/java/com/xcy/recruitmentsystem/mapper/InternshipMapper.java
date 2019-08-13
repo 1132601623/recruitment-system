@@ -9,7 +9,8 @@ import java.util.List;
 public interface InternshipMapper {
 
 
-    List<Work> blurrySelectInternship();
+    List<Work> blurrySelectInternship(Work work);
 
     List<Work> getBusiness();
+
 }
