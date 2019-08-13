@@ -46,11 +46,15 @@
     <div class="Content_noneBg">
             
             <!--搜索-->
+        <form id="from">
+            <input id="in01" name = "wBusiness" type="text"/>
+            <input id="in02" name="wAddress" type="text"/>
+        </form>
             <div class="Fairs_search">
                   <input name="" type="text" class="text" value="请输入关键字"/>
                   <input name="" type="text" class="text02" value="发布时间"/>
                   <input name="" type="text" class="text03" value="结束时间"/>
-                  <input name="" type="button" class="btn" value="" onclick="showVisionFairs()"/>
+                  <input name="" type="submit" class="btn"  value="" onclick="showVisionFairs()"/>
                   <a href="#" class="empty">清空条件</a>
                   <div class="SelectBox">
                        <span class="SelectText" id="sp01">请选择全职</span>
@@ -85,27 +89,31 @@
                       function showVisionFairs() {
                           window.location.href="visionFairsList.html"
                       }
-
+                      var fromWork = $("#from").serialize();
+                      alert($("#from").serialize())
                       $(function () {
-                          $.get("../visionFairs/blurrySelectVisionFairs",null,function (data) {
+                          $.get("../visionFairs/blurrySelectVisionFairs",fromWork,function (data) {
                               loadData(data)
                           })
                       })
                       function loadData(data) {
                           $(data).each(function () {
-                              var dt = "<dt onclick='showData(this)'><a>" + this.wBusiness + "</a></dt>"
+                              var dt = "<dt onclick='showData(this)'><a>" + this.wbusiness + "</a></dt>"
                               $("#subiness").append(dt)
 
-                              var dt = "<dt onclick='showData2(this)'><a>" + this.wAddress + "</a></dt>"
+                              var dt = "<dt onclick='showData2(this)'><a>" + this.waddress + "</a></dt>"
                               $("#wAdress").append(dt)
                           })
                       }
 
                       function showData(obj) {
-                          $("#sp01").html(obj)
+                         var av = $("#sp01").html(obj)
+                        $("#in01").val($("#sp01").text());
+
                       }
                       function showData2(obj) {
                           $("#sp02").html(obj)
+                          $("#in02").val($("#sp02").text())
                       }
                   </script>
             </div>

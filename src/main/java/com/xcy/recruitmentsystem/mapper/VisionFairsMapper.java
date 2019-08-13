@@ -9,5 +9,8 @@ import java.util.List;
 public interface VisionFairsMapper {
 
 
-    List<Work> blurrySelectVisionFairs();
+    List<Work> blurrySelectVisionFairs(Work work);
+
+    List<Work> getMessage();
+
 }

@@ -9,5 +9,9 @@ import java.util.List;
 public interface FullTimeMapper {
 
 
-    List<Work> blurrySelectFullTime();
+    List<Work> blurrySelectFullTime(Work work);
+
+    List<Work> getMessage();
+
+    List<Work> getMessages(int id);
 }

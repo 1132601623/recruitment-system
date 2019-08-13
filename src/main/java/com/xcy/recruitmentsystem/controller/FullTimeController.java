@@ -16,8 +16,21 @@ public class FullTimeController {
     FullTimeService fullTimeService;
 
     @RequestMapping("/blurrySelectFullTime")
-    public List<Work> blurrySelectFullTime() {
-        List<Work> works= fullTimeService.blurrySelectFullTime();
+    public List<Work> blurrySelectFullTime(Work work) {
+        List<Work> works= fullTimeService.blurrySelectFullTime(work);
+        return works;
+    }
+
+    @RequestMapping("/getMessage")
+    public List<Work> getMessage() {
+        List<Work> works= fullTimeService.getMessage();
+        return works;
+    }
+
+
+    @RequestMapping("/getMessages")
+    public List<Work> getMessages(int id) {
+        List<Work> works= fullTimeService.getMessages(id);
         return works;
     }
 }

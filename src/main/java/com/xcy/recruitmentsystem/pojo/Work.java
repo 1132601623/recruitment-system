@@ -43,4 +43,36 @@ public class Work {
   private String cName;
 
   private String uEmail;
+
+  /*public String getwName() {
+    return wName;
+  }
+
+  public void setwName(String wName) {
+    this.wName = wName;
+  }
+
+  public String getwBusiness() {
+    return wBusiness;
+  }
+
+  public void setwBusiness(String wBusiness) {
+    this.wBusiness = wBusiness;
+  }
+
+  public String getwSkill() {
+    return wSkill;
+  }
+
+  public void setwSkill(String wSkill) {
+    this.wSkill = wSkill;
+  }
+
+  public String getwAddress() {
+    return wAddress;
+  }
+
+  public void setwAddress(String wAddress) {
+    this.wAddress = wAddress;
+  }*/
 }

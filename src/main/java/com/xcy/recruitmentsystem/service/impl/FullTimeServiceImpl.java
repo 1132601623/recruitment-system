@@ -15,9 +15,21 @@ public class FullTimeServiceImpl implements FullTimeService {
     FullTimeMapper fullTimeMapper;
 
     @Override
-    public List<Work> blurrySelectFullTime() {
+    public List<Work> blurrySelectFullTime(Work work) {
 
-        List<Work> workList= fullTimeMapper.blurrySelectFullTime();
+        List<Work> workList= fullTimeMapper.blurrySelectFullTime(work);
         return workList;
+    }
+
+    @Override
+    public List<Work> getMessage() {
+        List<Work> message = fullTimeMapper.getMessage();
+        return message;
+    }
+
+    @Override
+    public List<Work> getMessages(int id) {
+        List<Work> messages = fullTimeMapper.getMessages(id);
+        return messages;
     }
 }

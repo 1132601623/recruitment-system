@@ -39,7 +39,7 @@
       </if>
     </where>
   </sql>
-  <select id="blurrySelectInternship" resultMap="BaseResultMap">
+  <select id="blurrySelectInternship" resultMap="BaseResultMap" parameterType="work">
         <include refid="selectAllSql"></include>
         <include refid="selectWhereSql"></include>
   </select>

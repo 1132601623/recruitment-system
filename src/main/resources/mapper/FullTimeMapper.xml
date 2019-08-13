@@ -39,9 +39,17 @@
       </if>
     </where>
   </sql>
-  <select id="blurrySelectFullTime" resultMap="BaseResultMap">
+  <select id="blurrySelectFullTime" resultMap="BaseResultMap" parameterType="work">
         <include refid="selectAllSql"></include>
         <include refid="selectWhereSql"></include>
+  </select>
+
+  <select id="getMessage" resultMap="BaseResultMap">
+    <include refid="selectAllSql"></include>
+  </select>
+
+  <select id="getMessages" resultMap="BaseResultMap" parameterType="int">
+    <include refid="selectAllSql"></include>
   </select>
 
 

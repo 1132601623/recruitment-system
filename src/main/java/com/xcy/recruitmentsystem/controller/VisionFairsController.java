@@ -16,8 +16,16 @@ public class VisionFairsController {
     VisionFairsService visionFairsService;
 
     @RequestMapping("/blurrySelectVisionFairs")
-    public List<Work> blurrySelectVisionFairs() {
-        List<Work> works = visionFairsService.blurrySelectVisionFairs();
+    public List<Work> blurrySelectVisionFairs(Work work) {
+        List<Work> works = visionFairsService.blurrySelectVisionFairs(work);
+        System.out.println(work);
         return works;
     }
+
+    @RequestMapping("/getMessage")
+    public List<Work> getMessage() {
+        List<Work> works = visionFairsService.getMessage();
+        return works;
+    }
+
 }

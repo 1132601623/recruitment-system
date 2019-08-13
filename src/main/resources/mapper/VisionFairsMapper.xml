@@ -28,22 +28,22 @@
 
 
       <if test="wSkill != null and wSkill != ''">
-        wSkill like concat ('%',#{wSkill},'%')
+        and wSkill like concat ('%',#{wSkill},'%')
       </if>
 
       <if test="wDate != null and wDate != ''">
         wDate like concat ('%',#{wDate},'%')
-        <choose>
-          <when test="wDate != null and wDate">
 
-          </when>
-        </choose>
       </if>
     </where>
   </sql>
-  <select id="blurrySelectVisionFairs" resultMap="BaseResultMap">
+  <select id="blurrySelectVisionFairs" resultMap="BaseResultMap" parameterType="work">
         <include refid="selectAllSql"></include>
         <include refid="selectWhereSql"></include>
+  </select>
+
+  <select id="getMessage" resultMap="BaseResultMap">
+    <include refid="selectAllSql"></include>
   </select>
 
 

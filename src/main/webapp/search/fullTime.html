@@ -8,6 +8,7 @@
 <link href="../css/css_whir.css" rel="stylesheet" type="text/css" />
 <script src="../Script/jquery-1.4.2.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="../Script/tab.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <!--[if IE 6]>
     <script src="../Script/pngAlaph.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -93,10 +94,13 @@
                             <input name="" type="text" class="text02" value=""/>
                             <input name="" type="button" class="btn" value="" onclick="showFullTimeList()"/>
                             <a href="#" class="empty">清空条件</a>
-                            <div class="SelectBox">
+                            <div class="SelectBox" id="tdata">
                                  <span class="SelectText">请选择全职</span>
-                                 <dl class="SelectList" id="business">
-                                 </dl>
+                                <dl class="SelectList" v-for ="w in works">
+                                    <dt><a href="javascript:void(0);">{{w.wBusiness}}</a></dt>
+                                    <dt><a href="javascript:void(0);">{{w.wSkill}}</a></dt>
+                                    <dt><a href="javascript:void(0);">{{w.wAddress}}</a></dt>
+                                </dl>
                             </div>
                             <div class="SelectBox two">
                                  <span class="SelectText2">请选择</span>
@@ -105,9 +109,11 @@
                             </div>
                             <div class="SelectBox three">
                                  <span class="SelectText3">请选择</span>
-                                 <dl class="SelectList3" id="wAdress">
-
-                                 </dl>
+                                <dl class="SelectList">
+                                    <dt><a href="javascript:void(0);">宝马宝马佰汇广场佰汇广场佰汇广场</a></dt>
+                                    <dt><a href="javascript:void(0);">宝</a></dt>
+                                    <dt><a href="javascript:void(0);">奔驰</a></dt>
+                                </dl>
                             </div>
                        </div>
                        <!--1 End-->
@@ -172,13 +178,12 @@
                      });
 
                      function loadData(data){
-                         var businessDl = $("#business")
-                         businessDl.append("<a></a>")
-                         $(data).each(function () {
-                             var dt = "<dt ><a onclick='showInfo(this)'>" + this.wBusiness + "</a></dt>"
-                             businessDl.append(dt);
+                         var app=new Vue({
+                             el:"#tdata",
+                             data:{
+                                 works:[]
+                             },
                          })
-
                      }
 
                       function showFullTimeList() {

@@ -16,8 +16,8 @@ public class InternshipController {
     InternshipService internshipService;
 
     @RequestMapping("/blurrySelectInternship")
-    public List<Work> blurrySelectInternship() {
-        List<Work> works = internshipService.blurrySelectInternship();
+    public List<Work> blurrySelectInternship(Work work) {
+        List<Work> works = internshipService.blurrySelectInternship(work);
         return works;
     }
 
@@ -26,4 +26,5 @@ public class InternshipController {
         List<Work> works = internshipService.getBusiness();
         return works;
     }
+
 }
