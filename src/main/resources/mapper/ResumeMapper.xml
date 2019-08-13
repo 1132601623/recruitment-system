@@ -20,7 +20,9 @@
         <result column="p_expe" property="pExpe"/>
         <result column="p_edu_erpe" property="pEduErpe"/>
         <result column="p_study_expe" property="pStudyExpe"/>
-        <result  column="p_myself" property="pMyself"/>
+        <result column="p_myself" property="pMyself"/>
+        <result column="u_email" property="uEmail"/>
+        <result column="p_state" property="pState"/>
     </resultMap>
 
     <resultMap id="workMap" type="com.xcy.recruitmentsystem.pojo.Work">
@@ -36,7 +38,6 @@
         <result column="w_work_nature" jdbcType="VARCHAR" property="wWorkNature"/>
         <result column="w_date" jdbcType="VARCHAR" property="wDate"/>
         <result column="w_desc" jdbcType="VARCHAR" property="wDesc"/>
-        <result column="w_age" javaType="INTEGER" property="wAge"/>
         <result column="c_id" property="cId"/>
         <result column="c_name" property="cName"/>
     </resultMap>
@@ -52,7 +53,7 @@ insert into resume values (null, #{pName}, #{pBirthday},
     <select id="findJobByMessage" parameterType="work" resultMap="workMap">
         select work.*, company.c_name as cName from work, company
         <where>
-        work.c_id = company.id
+            work.c_id = company.id
             <if test="wBusiness != null and wBusiness != ''">
                 and w_business like CONCAT('%',#{wBusiness},'%')
             </if>
@@ -73,11 +74,15 @@ insert into resume values (null, #{pName}, #{pBirthday},
         select * from resume where u_email = #{email}
     </select>
 
-    <update id="addJob" parameterType="resume">
-        update work set r_id = #{id} where id =2
+    <update id="sendResume" parameterType="resume">
+        update resume set p_state = #{pState} where id = #{id}
     </update>
 
     <select id="findAllResume" resultMap="resumeMap">
         select * from resume
+    </select>
+
+    <select id="findResumeById" resultMap="resumeMap" parameterType="int">
+        select * from resume where id = #{id}
     </select>
 </mapper>
