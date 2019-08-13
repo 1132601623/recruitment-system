@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -61,8 +63,24 @@ public class ResumeController {
     // 查询所有简历
     @RequestMapping("/findAllResume")
     public List<Resume> findResume(Resume resume) {
+        //resume.setTime(new Date());
         List<Resume> resumeList = resumeService.findAllResume(resume);
-        System.out.println(resumeList);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (Resume re : resumeList) {
+            re.setTime(simpleDateFormat.format(new Date()));
+        }
+        return resumeList;
+    }
+
+    @RequestMapping("/findResumeByMessage")
+    public List<Resume> findResumeByMessage(Resume resume) {
+        //resume.setTime(new Date());
+
+        List<Resume> resumeList = resumeService.findResumeByMessage(resume);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (Resume re : resumeList) {
+            re.setTime(simpleDateFormat.format(new Date()));
+        }
         return resumeList;
     }
 
@@ -71,5 +89,20 @@ public class ResumeController {
     public Resume findResumeById(int id) {
         Resume resume = resumeService.findResumeById(id);
         return resume;
+    }
+
+    //查询已投递的简历
+    @RequestMapping("/findResumeByState")
+    public List<Resume> findResumeByState() {
+        String pState = "已投递";
+
+        List<Resume> resumeList = resumeService.findResumeByState(pState);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (Resume re : resumeList) {
+            re.setTime(simpleDateFormat.format(new Date()));
+        }
+        System.out.println(resumeList);
+        return resumeList;
     }
 }

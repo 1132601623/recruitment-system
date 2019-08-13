@@ -21,4 +21,8 @@
     <select id="findWorkByState" resultMap="workMap">
       select work.* from work, resume where work.r_id = resume.id and resume.p_state != 'null'
   </select>
+
+    <select id="selectWork" resultMap="workMap">
+        select * from work;
+    </select>
 </mapper>

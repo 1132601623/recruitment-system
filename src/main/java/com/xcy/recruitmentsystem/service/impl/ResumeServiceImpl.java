@@ -36,7 +36,6 @@ public class ResumeServiceImpl implements ResumeService {
 
     @Override
     public boolean sendResume(Resume resume) {
-        resume.setPState("已投递");
         int result = resumeMapper.sendResume(resume);
         return result > 0 ? true : false;
     }
@@ -44,6 +43,17 @@ public class ResumeServiceImpl implements ResumeService {
     @Override
     public Resume findResumeById(int id) {
         return resumeMapper.findResumeById(id);
+    }
+
+    @Override
+    public List<Resume> findResumeByMessage(Resume resume) {
+        return resumeMapper.findResumeByMessage(resume);
+    }
+
+    @Override
+    public List<Resume> findResumeByState(String pState) {
+        return resumeMapper.findResumeByState(pState);
+
     }
 
     @Override

@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface WorkMapper {
     List<Work> findWorkByState();
+
+    List<Work> selectWork();
 }

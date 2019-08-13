@@ -17,4 +17,9 @@ public class WorkServiceImpl implements WorkService {
     public List<Work> findWorkByState() {
         return workMapper.findWorkByState();
     }
+
+    @Override
+    public List<Work> selectWork() {
+        return workMapper.selectWork();
+    }
 }

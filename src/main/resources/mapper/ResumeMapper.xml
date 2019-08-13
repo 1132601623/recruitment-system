@@ -74,15 +74,53 @@ insert into resume values (null, #{pName}, #{pBirthday},
         select * from resume where u_email = #{email}
     </select>
 
-    <update id="sendResume" parameterType="resume">
+    <update id="sendResume" parameterType="com.xcy.recruitmentsystem.pojo.Resume">
         update resume set p_state = #{pState} where id = #{id}
     </update>
 
-    <select id="findAllResume" resultMap="resumeMap">
+    <select id="findAllResume" parameterType="com.xcy.recruitmentsystem.pojo.Resume" resultMap="resumeMap">
         select * from resume
+        <where>
+        1 = 1
+            <if test="pExpe != null and pExpe != ''">
+               and p_expe like CONCAT('%',#{pExpe},'%')
+            </if>
+            <if test="pAddress != null and pAddress != ''">
+                and p_address like CONCAT('%',#{pAddress},'%')
+            </if>
+            <if test="pEdu != null and pEdu != ''">
+                and p_edu like CONCAT('%',#{pEdu},'%')
+            </if>
+            <if test="pWork != null and pWork != ''">
+                and p_work like CONCAT('%',#{pWork},'%')
+            </if>
+        </where>
     </select>
 
     <select id="findResumeById" resultMap="resumeMap" parameterType="int">
         select * from resume where id = #{id}
+    </select>
+
+    <select id="findResumeByMessage" resultMap="resumeMap" parameterType="com.xcy.recruitmentsystem.pojo.Resume">
+        select * from resume
+        <where>
+        1 = 1
+            <if test="pExpe != null and pExpe != ''">
+                and p_expe like CONCAT('%',#{pExpe},'%')
+            </if>
+            <if test="pAddress != null and pAddress != ''">
+                and p_address like CONCAT('%',#{pAddress},'%')
+            </if>
+            <if test="pEdu != null and pEdu != ''">
+                and p_edu like CONCAT('%',#{pEdu},'%')
+            </if>
+            <if test="pWork != null and pWork != ''">
+                and  p_work like CONCAT('%',#{pWork},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findResumeByState" parameterType="string" resultMap="resumeMap">
+        select * from resume where p_state = #{pState}
     </select>
 </mapper>

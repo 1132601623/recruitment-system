@@ -12,6 +12,29 @@
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
 
+    <script >
+        $(function () {
+
+            $.post("../findResumeByState", null, function (data) {
+                loadData(data);
+
+            });
+        });
+        function loadData(data) {
+            $(data).each(
+                function (i, values) {
+                    $("#list").append(
+                        "<tr><td style='padding-top: 15px'>" + values.pName + "</td>"
+                        + "<td style='padding-left: 60px'>" + values.pWanted + "</td>"
+                        + "<td style='padding-left: 70px'>" + values.pEdu + "</td>"
+                        + "<td style='padding-left: 50px'>" + values.pWork + "</td>"
+                        + "<td style='padding-left: 50px'>" + values.time + "</td></tr>"
+                    );
+
+                }
+            );
+        }
+    </script>
 </head>
 <body>
     
@@ -41,100 +64,29 @@
                         <!--#include file="../include/menu_memberC3.html" -->
                         <div class="Manage_list">
                                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                    <thead>
                                   <tr class="title">
-                                    <td>简历名称</td>
-                                    <td>职位名称</td>
-                                    <td>学历</td>
-                                    <td>年龄</td>
-                                    <td>工作年限</td>
-                                    <td>更新日期</td>
-                                    <td>&nbsp;</td>
+                                      <td>姓名</td>
+                                      <td width="100px" style="padding-left: 70px">求职意向</td>
+                                      <td width="100px" style="padding-left: 70px">学历</td>
+
+                                      <td width="80px" style="padding-left: 30px ">工作年限</td>
+                                      <td style="padding-left: 50px">更新日期</td>
+                                      <td>&nbsp;</td>
                                   </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" /><a href="C_ResumeManageInfo.html">电子商务经理/主管 6年工作经验 深圳</a></td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="C_ResumeManageInfo.html" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>  
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
-                                  <tr>
-                                    <td><input name="" type="checkbox" value="" />电子商务经理/主管 6年工作经验 深圳</td>
-                                    <td>销售/实习</td>
-                                    <td>本科</td>
-                                    <td>23</td>
-                                    <td>五年以上</td>
-                                    <td>15/05/23</td>
-                                    <td><a href="#" class="a1"></a></td>
-                                  </tr>
+                                    </thead>
+                                    <tbody id="list">
+
+                                    </tbody>
+
                                 </table>
                                 <dl>
                                      <input name="" type="checkbox" value="" />全选
                                      <a href="#" class="bule">发送面试通知</a>
-                                     <a href="#">收藏</a>
-                                     <a href="#">导出</a>
+
                                 </dl>
                                 <!--Pages-->
-                                <div class="Pages">
-                                      <span class="p_cur">目前在第<b>1</b>页,</span>
-                                      <span class="p_count">共有<b>3</b>页,</span>
-                                      <span class="p_total">共有<b>3</b>条记录</span>
-                                      <span class="p_page">
-                                      <a href="#" class="a_first">首页</a><a href="#" class="a_prev">上一页</a>
-                                      <em class="num"><a href="#" class="a_cur">1</a><a href="#">2</a><a href="#">3</a></em>
-                                      <a href="#" class="a_next">下一页</a><a href="#" class="a_end">末页</a> 
-                                      <b class="f1">跳转到</b>
-                                      <input class="i_text" type="text" name="textfield" id="textfield" />
-                                      <b class="f2">页</b>
-                                      <input class="i_button" type="submit" name="button" id="button" value="" />
-                                  </span>
-                                </div>
+
                                 <!--Pages-->
                         </div>
                         <!--End-->

@@ -1,233 +1,257 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="x-ua-compatible" content="ie=7" />
-<meta name="Author" content="">
-<title>优才中国行</title>
-<link href="../css/css_whir.css" rel="stylesheet" type="text/css" />
-<script src="../Script/jquery-1.4.2.min.js" type="text/javascript"></script>
-<!--[if IE 6]>
-<script src="Script/pngAlaph.js"></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=7"/>
+    <meta name="Author" content="">
+    <title>优才中国行</title>
+    <link href="../css/css_whir.css" rel="stylesheet" type="text/css"/>
+    <script src="../Script/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <!--[if IE 6]>
+    <script src="Script/pngAlaph.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
 
-    <script>
-        
-        $(function() {
-            
-            $.post("../findAllResume",null,function (data) {
 
-                $(data).each(function () {
-            //1.获取select
-                    var pExpe = $("#pExpe");
-                    var option = "<option >"+this.pExpe+"</option>";
+</head>
+<body>
 
-                    pExpe.append(option);
-                })
+<!--top-->
+<!--#include file="../include/top.html" -->
+<!--top End-->
+
+<!--Star-->
+<div class="H_bodyEnd">
+    <div class="Banner"><img src="../images/temp/Ban_member.jpg"/></div>
+    <div class="Content">
+
+        <!--Sidebar-->
+        <div class="Sidebar">
+            <!--#include file="../include/menu_member.html" -->
+        </div>
+        <!--Sidebar End-->
+        <!--Right-->
+        <div class="RightSidebar">
+            <div class="Current">
+                <h1 class="bgMember">欢迎回来！</h1>
+                <dl>当前位置：<a href="../index.html">首页</a> > <span>个人中心</span></dl>
+            </div>
+            <div class="MainContent">
+
+                <!--Star-->
+                <!--#include file="../include/menu_memberC2.html" -->
+                <div class="space10"></div>
+                <form id="form12">
+                    <table border="0" cellspacing="0" cellpadding="0" class="Apply_manage">
+                        <tr>
+                            <td class="name">求职意向：</td>
+                            <td><select id="pExpe" onchange="a()">
+                                <option>----请选择----</option>
+                            </select>
+                            </td>
+
+                            <td class="name">居住地：</td>
+                            <td><select id="pAddress" onchange="b()">
+                                <option>----请选择----</option>
+                            </select>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="name">学历：</td>
+                            <td><select id="pEdu" onchange="c()">
+                                <option>----请选择----</option>
+                            </select></td>
+                            <td class="name">工作年限：</td>
+                            <td><select id="pWork" onchange="d()">
+                                <option>----请选择----</option>
+                            </select></td>
+                        </tr>
+
+
+                        <input id="pExpe1" name="pExpe" type="hidden" />
+                        <input id="pAddress1" name="pAddress" type="hidden" />
+                        <input id="pEdu1" name="pEdu" type="hidden" />
+                        <input id="pWork1" name="pWork" type="hidden" v/>
+                        <tr>
+                            <td class="name">&nbsp;</td>
+                            <td style="padding-right: 100px"><input type="button" value="搜索" onclick="showList()"></td>
+                        </tr>
+                    </table>
+                </form>
+
+                <div class="space10"></div>
+                <div class="Manage_list">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr class="title">
+                            <td>姓名</td>
+                            <td width="100px" style="padding-left: 60px ">求职意向</td>
+                            <td width="100px" style="padding-left: 70px">学历</td>
+                            <td width="80px" style="padding-left: 10px ">工作年限</td>
+                            <td style="padding-left: 50px">更新日期</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        </thead>
+                        <tbody id="list">
+
+                        </tbody>
+
+                    </table>
+
+                    <!--Pages-->
+
+
+
+                </div>
+                <!--End-->
+
+            </div>
+        </div>
+        <!--Right End-->
+
+        <div class="space25"></div>
+    </div>
+    <div class="space25"></div>
+</div>
+<!--End-->
+
+<!--Bottom-->
+<!--#include file="../include/bottom.html" -->
+<!--Bottom End-->
+
+<script type="text/javascript" src="../Script/tab.js"></script>
+<script type="text/javascript" language="javascript">
+    jQuery("#menu2").attr("class", "acur");
+    jQuery("#tab1").attr("class", "acur");
+</script>
+
+<script>
+
+    $(function () {
+
+        $.post("../findAllResume", null, function (data) {
+
+            $(data).each(function () {
+                //1.获取select
+                var pExpe = $("#pExpe");
+                var option = "<option >" + this.pExpe + "</option>";
+
+                pExpe.append(option);
             })
-        });
+        })
+    });
 
-        $(function() {
+    $(function () {
 
-            $.post("../findAllResume",null,function (data) {
+        $.post("../findAllResume", null, function (data) {
 
-                $(data).each(function () {
+            $(data).each(function () {
 
-                    var pAddress = $("#pAddress");
-                    var option = "<option >"+this.pAddress+"</option>";
+                var pAddress = $("#pAddress");
+                var option = "<option >" + this.pAddress + "</option>";
 
-                    pAddress.append(option);
-                })
+                pAddress.append(option);
             })
-        });
-        $(function() {
+        })
+    });
+    $(function () {
 
-            $.post("../findAllResume",null,function (data) {
+        $.post("../findAllResume", null, function (data) {
 
-                $(data).each(function () {
+            $(data).each(function () {
 
-                    var pEdu = $("#pEdu");
-                    var option = "<option >"+this.pEdu+"</option>";
+                var pEdu = $("#pEdu");
+                var option = "<option >" + this.pEdu + "</option>";
 
-                    pEdu.append(option);
-                })
+                pEdu.append(option);
             })
-        });
-        $(function() {
+        })
+    });
+    $(function () {
 
-            $.post("../findAllResume",null,function (data) {
+        $.post("../findAllResume", null, function (data) {
 
-                $(data).each(function () {
+            $(data).each(function () {
 
-                    var pWork = $("#pWork");
-                    var option = "<option >"+this.pWork+"</option>";
+                var pWork = $("#pWork");
+                var option = "<option >" + this.pWork + "</option>";
 
-                    pWork.append(option);
-                })
+                pWork.append(option);
             })
-        });
+        })
+    });
 
-        function a() {
-           var pe = $("#pExpe option:selected").text();
-           $("#pExpe1").val(pe);
-        }
-        function b() {
-            var pa = $("#pAddress option:selected").text();
-            $("#pAddress1").val(pa);
-        }
-        function c() {
-            var pd = $("#pEdu option:selected").text();
-            $("#pEdu1").val(pd);
-        }
-        function d() {
-            var pw = $("#pWork option:selected").text();
-            $("#pWork1").val(pw);
-        }
-        
-        var fo = $("form").serialize();
-        $.post("",fo,function (data) {
+    function a() {
+        var pe = $("#pExpe option:selected").text();
+        $("#pExpe1").val(pe);
+    }
+
+    function b() {
+        var pa = $("#pAddress option:selected").text();
+        $("#pAddress1").val(pa);
+    }
+
+    function c() {
+        var pd = $("#pEdu option:selected").text();
+        $("#pEdu1").val(pd);
+    }
+
+    function d() {
+        var pw = $("#pWork option:selected").text();
+        $("#pWork1").val(pw);
+    }
+
+
+
+    function showList() {
+        $("#list").html("");
+        var fo1 = $("#form12").serialize();
+        $.post("../findResumeByMessage", fo1, function (data) {
+            loadData(data);
+        });
+    }
+
+    function loadData(data) {
+        $(data).each(
+            function (i, values) {
+                $("#list").append(
+                    "<tr><td style='padding-top: 15px'>" + values.pName + "</td>"
+                    + "<td style='padding-left: 60px'>" + values.pWanted + "</td>"
+                    + "<td style='padding-left: 70px'>" + values.pEdu + "</td>"
+                    + "<td style='padding-left: 30px'>" + values.pWork + "</td>"
+                    + "<td style='padding-left: 50px'>" + values.time + "</td></tr>"
+                );
+
+            }
+        );
+    };
+
+    $(function () {
+        $.post("../findAllResume", null, function (data) {
+            loadData(data);
+        });
+    });
+        function loadData(data) {
             $(data).each(
                 function (i, values) {
                     $("#list").append(
-                        "<td style='padding-top: 15px'>" + values.pName + "</td>"
-                        + "<td style='padding-top: 15px'>" + values.pWanted + "</td>"
-                        + "<td style='padding-top: 15px'>" + values.pEdu + "</td>"
-                        + "<td style='padding-top: 15px'>" + values.pWork + "</td>"
-
+                        "<tr><td style='padding-top: 15px'>" + values.pName + "</td>"
+                        + "<td style='padding-left: 60px'>" + values.pWanted + "</td>"
+                        + "<td style='padding-left: 70px'>" + values.pEdu + "</td>"
+                        + "<td style='padding-left: 30px'>" + values.pWork + "</td>"
+                        + "<td style='padding-left: 50px'>" + values.time + "</td></tr>"
                     );
+
                 }
             );
-        })
-    </script>
-</head>
-<body>
-    
-    <!--top-->
-    <!--#include file="../include/top.html" -->
-    <!--top End-->
-    
-    <!--Star-->
-    <div class="H_bodyEnd">
-    <div class="Banner"><img src="../images/temp/Ban_member.jpg" /></div>
-    <div class="Content">
-    
-           <!--Sidebar-->
-           <div class="Sidebar">
-           <!--#include file="../include/menu_member.html" -->
-           </div>
-           <!--Sidebar End-->
-           <!--Right-->
-           <div class="RightSidebar">
-                <div class="Current">
-                    <h1 class="bgMember">欢迎回来！</h1>
-                    <dl>当前位置：<a href="../index.html">首页</a> > <span>个人中心</span></dl>
-                </div>
-                <div class="MainContent">
-                 
-                        <!--Star-->
-                        <!--#include file="../include/menu_memberC2.html" -->
-                        <div class="space10"></div>
-                    <form>
-                        <table border="0" cellspacing="0" cellpadding="0" class="Apply_manage">
-                            <tr>
-                              <td class="name">求职意向：</td>
-                              <td><select id="pExpe" onchange="a()">
-                                  <option>----请选择----</option>
-                              </select>
-                              </td>
+        }
 
-                              <td class="name">居住地：</td>
-                              <td><select id="pAddress" onchange="b()">
-                                  <option>----请选择----</option>
-                              </select>
-                              </td>
-                            </tr>
 
-                            <tr>
-                              <td class="name">学历：</td>
-                              <td><select id="pEdu" onchange="c()"><option>----请选择----</option></select></td>
-                              <td class="name">工作年限：</td>
-                              <td><select id="pWork" onchange="d()"><option>----请选择----</option></select></td>
-                            </tr>
-                            <tr>
-                                <td class="name">&nbsp;</td>
-                                <td style="padding-right: 100px"><input  type="button" class="btn" ></td>
-                            </tr>
-                            <input id="pExpe1" type="hidden" value=""/>
-                            <input id="pAddress1" type="hidden" value=""/>
-                            <input id="pEdu1" type="hidden" value=""/>
-                            <input id="pWork1" type="hidden" value=""/>
-                        </table>
-                    </form>
 
-                        <div class="space10"></div>
-                        <div class="Manage_list">
-                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                  <tr class="title">
-                                    <td>姓名</td>
-                                    <td>求职意向</td>
-                                    <td>学历</td>
-                                    <td>工作年限</td>
-                                    <td>更新日期</td>
-                                    <td>&nbsp;</td>
-                                  </tr>
-                                    <tr id="list">
 
-                                    </tr>
+</script>
 
-                                </table>
-                                <dl>
-                                     <input name="" type="checkbox" value="" />全选
-                                     <a href="#" class="bule">发送面试通知</a>
-                                     <a href="#">收藏</a>
-                                     <a href="#">导出</a>
-                                </dl>
-                                <!--Pages-->
-                                <div class="Pages">
-                                      <span class="p_cur">目前在第<b>1</b>页,</span>
-                                      <span class="p_count">共有<b>3</b>页,</span>
-                                      <span class="p_total">共有<b>3</b>条记录</span>
-                                      <span class="p_page">
-                                      <a href="#" class="a_first">首页</a><a href="#" class="a_prev">上一页</a>
-                                      <em class="num"><a href="#" class="a_cur">1</a><a href="#">2</a><a href="#">3</a></em>
-                                      <a href="#" class="a_next">下一页</a><a href="#" class="a_end">末页</a> 
-                                      <b class="f1">跳转到</b>
-                                      <input class="i_text" type="text" name="textfield" id="textfield" />
-                                      <b class="f2">页</b>
-                                      <input class="i_button" type="submit" name="button" id="button" value="" />
-                                  </span>
-                                </div>
-                                <!--Pages-->
-                                
-                                <div class="Aapply_endTxt">
-                                   <span>保存上面条件为简历过滤器</span>
-                                   过滤器名：
-                                   <input name="" type="text" class="text"/>
-                                   <input name="" type="button" class="btn" value=""/>
-                                </div>
-                        </div>
-                        <!--End-->
-                      
-             </div>
-           </div>
-           <!--Right End-->
-           
-    <div class="space25"></div>
-    </div>
-    <div class="space25"></div>
-    </div>
-    <!--End-->
-    
-    <!--Bottom-->
-    <!--#include file="../include/bottom.html" -->
-    <!--Bottom End-->
-    
-    <script type="text/javascript" src="../Script/tab.js"></script>
-    <script type="text/javascript" language="javascript">
-		jQuery("#menu2").attr("class","acur");
-		jQuery("#tab1").attr("class","acur");
-    </script>
-    
 </body>
 </html>

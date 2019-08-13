@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface WorkService {
     List<Work> findWorkByState();
+
+    List<Work> selectWork();
 }

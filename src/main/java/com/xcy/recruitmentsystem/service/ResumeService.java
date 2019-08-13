@@ -21,4 +21,8 @@ public interface ResumeService {
     boolean sendResume(Resume resume);
 
     Resume findResumeById(int id);
+
+    List<Resume> findResumeByMessage(Resume resume);
+
+    List<Resume> findResumeByState(String pState);
 }
